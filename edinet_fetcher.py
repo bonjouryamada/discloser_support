@@ -4,6 +4,7 @@ import zipfile
 import io
 import datetime
 import concurrent.futures
+import re
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
@@ -16,11 +17,28 @@ FINANCIAL_KEYS = [
 ]
 
 FINANCIAL_TAG_PATTERNS = {
-    "net_assets": ["netassets"],
-    "net_sales": ["netsales", "operatingrevenue", "ordinaryrevenues", "revenue"],
-    "recurring_profit": ["ordinaryincome", "ordinaryprofit", "ordinaryincomeloss"],
-    "net_income": ["profitlossattributabletoownersofparent", "netincomeloss", "profitloss"],
+    "net_assets": ["netassets", "totalequity"],
+    "net_sales": [
+        "netsales",
+        "operatingrevenue",
+        "operatingrevenues",
+        "ordinaryrevenues",
+        "ordinaryincome",
+        "revenue",
+        "revenues",
+        "insurancepremiumsandincome",
+    ],
+    "recurring_profit": ["ordinaryprofit", "ordinaryincomeloss", "recurringprofit"],
+    "net_income": ["profitlossattributabletoownersofparent", "profitattributabletoownersofparent", "netincomeloss", "netincome"],
     "capital_stock": ["capitalstock"],
+}
+
+FINANCIAL_LABELS = {
+    "net_assets": "連結純資産",
+    "net_sales": "連結売上高/経常収益",
+    "recurring_profit": "連結経常利益",
+    "net_income": "親会社株主に帰属する当期純利益",
+    "capital_stock": "資本金",
 }
 
 # EDINET_API_KEY will be loaded dynamically to catch .env or st.secrets updates
@@ -62,6 +80,8 @@ def _financial_key_for_tag(name_attr):
     name = name_attr.lower().split(":")[-1]
     if _is_abstract_tag(name):
         return None
+    if "ordinaryincomeloss" in name:
+        return "recurring_profit"
     for key, patterns in FINANCIAL_TAG_PATTERNS.items():
         if any(pattern in name for pattern in patterns):
             return key
@@ -86,11 +106,15 @@ def _context_score(context_ref):
     return score
 
 def _value_in_millions(tag):
-    val_str = tag.text.replace(",", "").strip()
+    val_str = tag.text.replace(",", "").replace("，", "").strip()
     if not val_str:
         return None
 
-    val = int(val_str)
+    negative = val_str.startswith("(") and val_str.endswith(")")
+    val_str = val_str.strip("()")
+    val = float(val_str)
+    if negative:
+        val = -val
     if tag.get("sign", "+") == "-":
         val = -val
 
@@ -105,7 +129,7 @@ def _value_in_millions(tag):
 def _parse_financial_data_from_soup(soup):
     parsed_data = {}
 
-    for tag in soup.find_all("ix:nonfraction"):
+    for tag in soup.find_all(lambda item: item.get("name") and item.get("contextref")):
         name_attr = tag.get("name", "")
         key = _financial_key_for_tag(name_attr)
         if not key:
@@ -128,17 +152,86 @@ def _parse_financial_data_from_soup(soup):
 
     return parsed_data
 
-def _format_financial_data(parsed_data):
+def _parse_date(value):
+    if not value:
+        return None
+    text = str(value).strip()
+    for pattern in ("%Y-%m-%d", "%Y/%m/%d"):
+        try:
+            return datetime.datetime.strptime(text[:10], pattern).date()
+        except ValueError:
+            pass
+    match = re.search(r"(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日", text)
+    if match:
+        return datetime.date(int(match.group(1)), int(match.group(2)), int(match.group(3)))
+    return None
+
+def _period_label_from_end_date(end_date):
+    parsed = _parse_date(end_date)
+    if not parsed:
+        return ""
+    return f"{parsed.year}年{parsed.month}月期"
+
+def _extract_doc_info_from_soup(soup):
+    info = {}
+    tag_patterns = {
+        "period_start": ["currentfiscalyearstartdatedei", "currentperiodstartdatedei"],
+        "period_end": ["currentfiscalyearenddatedei", "currentperiodenddatedei"],
+        "document_title": ["documenttitlecoverpage"],
+    }
+    for tag in soup.find_all(lambda item: item.get("name")):
+        name = tag.get("name", "").lower().split(":")[-1]
+        text = tag.get_text(strip=True)
+        if not text:
+            continue
+        for key, patterns in tag_patterns.items():
+            if key not in info and any(pattern in name for pattern in patterns):
+                info[key] = text
+    if info.get("period_end"):
+        info["period_label"] = _period_label_from_end_date(info["period_end"])
+    return info
+
+def _merge_doc_info(base, update):
+    merged = dict(base or {})
+    for key, value in (update or {}).items():
+        if value and not merged.get(key):
+            merged[key] = value
+    if not merged.get("period_label") and merged.get("period_end"):
+        merged["period_label"] = _period_label_from_end_date(merged["period_end"])
+    return merged
+
+def _format_doc_info(info):
+    info = info or {}
+    parts = []
+    if info.get("doc_description"):
+        parts.append(info["doc_description"])
+    elif info.get("document_title"):
+        parts.append(info["document_title"])
+    if info.get("period_label"):
+        parts.append(info["period_label"])
+    if info.get("period_start") or info.get("period_end"):
+        parts.append(f"{info.get('period_start', '?')}〜{info.get('period_end', '?')}")
+    if info.get("submit_datetime"):
+        parts.append(f"提出日: {str(info['submit_datetime'])[:10]}")
+    if info.get("doc_id"):
+        parts.append(f"docID: {info['doc_id']}")
+    return " / ".join(parts)
+
+def _format_financial_data(parsed_data, doc_info=None):
     missing_keys = [key for key in FINANCIAL_KEYS if key not in parsed_data]
     financial_data = {key: parsed_data.get(key, (0, 0))[0] for key in FINANCIAL_KEYS}
     financial_data["missing_keys"] = missing_keys
+    financial_data["doc_info"] = doc_info or {}
+    financial_data["doc_info_label"] = _format_doc_info(doc_info)
     financial_data["warnings"] = [
-        f"EDINET XBRLで値を取得できなかった項目があります: {', '.join(missing_keys)}"
+        "EDINET XBRLで値を取得できなかった項目があります: "
+        + "、".join(FINANCIAL_LABELS.get(key, key) for key in missing_keys)
     ] if missing_keys else []
     return financial_data
 
-def _extract_financial_data_from_zip_bytes(zip_bytes):
+def _extract_financial_data_from_zip_bytes(zip_bytes, doc_info=None):
     parsed_data = {}
+    merged_doc_info = dict(doc_info or {})
 
     with zipfile.ZipFile(io.BytesIO(zip_bytes)) as z:
         htm_files = [f for f in z.namelist() if f.startswith("XBRL/PublicDoc/") and f.endswith(".htm")]
@@ -146,12 +239,28 @@ def _extract_financial_data_from_zip_bytes(zip_bytes):
         for htm_file in htm_files:
             html_content = z.read(htm_file)
             soup = BeautifulSoup(html_content, "html.parser")
+            merged_doc_info = _merge_doc_info(merged_doc_info, _extract_doc_info_from_soup(soup))
             for key, candidate in _parse_financial_data_from_soup(soup).items():
                 previous = parsed_data.get(key)
                 if previous is None or candidate[1] > previous[1]:
                     parsed_data[key] = candidate
 
-    return _format_financial_data(parsed_data)
+    return _format_financial_data(parsed_data, merged_doc_info)
+
+def _doc_metadata_from_result(doc, target_date_str):
+    period_start = doc.get("periodStart")
+    period_end = doc.get("periodEnd")
+    return {
+        "doc_id": doc.get("docID"),
+        "filer_name": doc.get("filerName") or "",
+        "sec_code": str(doc.get("secCode") or ""),
+        "doc_description": doc.get("docDescription") or "",
+        "submit_datetime": doc.get("submitDateTime") or target_date_str,
+        "search_date": target_date_str,
+        "period_start": period_start,
+        "period_end": period_end,
+        "period_label": _period_label_from_end_date(period_end),
+    }
 
 def get_doc_id_for_date(target_date_str, company_name, base_url, headers):
     params = {"date": target_date_str, "type": 2}
@@ -174,7 +283,7 @@ def get_doc_id_for_date(target_date_str, company_name, base_url, headers):
                     is_match = True
 
                 if doc_desc and filer_name and "有価証券報告書" in doc_desc and is_match:
-                    return (doc.get("docID"), filer_name)
+                    return _doc_metadata_from_result(doc, target_date_str)
     return None
 
 def get_latest_yuho_doc_id(company_name, max_days=365):
@@ -206,18 +315,17 @@ def get_latest_yuho_doc_id(company_name, max_days=365):
                 except requests.RequestException:
                     continue
                 if result:
-                    doc_id, filer_name = result
                     d_str = future_to_date[future]
-                    found_docs.append((d_str, doc_id, filer_name))
+                    found_docs.append((d_str, result))
                     
         if found_docs:
             # 同じチャンク内で複数見つかった場合は、もっとも日付が新しいものを優先
             found_docs.sort(key=lambda x: x[0], reverse=True)
-            return (found_docs[0][1], found_docs[0][2])
+            return found_docs[0][1]
             
     return None
 
-def extract_financial_data_from_xbrl(doc_id):
+def extract_financial_data_from_xbrl(doc_id, doc_info=None):
     """
     doc_id から ZIPを取得し、内容のXBRL(.htm)をパースして純資産・売上高・経常利益・当期純利益を抽出します。
     """
@@ -236,7 +344,8 @@ def extract_financial_data_from_xbrl(doc_id):
     if resp.status_code != 200:
         raise Exception(f"Failed to download document {doc_id} from EDINET API.")
         
-    return _extract_financial_data_from_zip_bytes(resp.content)
+    merged_info = _merge_doc_info(doc_info, {"doc_id": doc_id})
+    return _extract_financial_data_from_zip_bytes(resp.content, merged_info)
 
 def get_financial_data(company_name):
     """
@@ -246,5 +355,4 @@ def get_financial_data(company_name):
     if not doc_result:
         raise ValueError(f"過去1年間に提出された「{company_name}」の有価証券報告書が見つかりませんでした。")
     
-    doc_id, _ = doc_result
-    return extract_financial_data_from_xbrl(doc_id)
+    return extract_financial_data_from_xbrl(doc_result["doc_id"], doc_result)

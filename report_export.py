@@ -29,7 +29,14 @@ def generate_report(
     financial_data: dict[str, float],
     company_query: str = "",
     fetched_company_name: str = "",
+    edinet_doc_info: dict[str, Any] | None = None,
 ) -> bytes:
+    doc_info = edinet_doc_info or financial_data.get("doc_info") or {}
+    document_name = doc_info.get("doc_description") or doc_info.get("document_title") or ""
+    submit_date = str(doc_info.get("submit_datetime") or "")[:10]
+    period_label = doc_info.get("period_label") or ""
+    doc_id = doc_info.get("doc_id") or ""
+
     workbook = Workbook()
     sheet = workbook.active
     sheet.title = "判定支援レポート"
@@ -44,9 +51,12 @@ def generate_report(
     metadata = [
         ("会社名・証券コード入力", company_query),
         ("EDINET取得企業名", fetched_company_name),
+        ("EDINET書類名", document_name),
+        ("EDINET提出日", submit_date),
+        ("EDINET対象決算期", period_label),
+        ("EDINET docID", doc_id),
         ("開示区分", record["disclosure_category"]),
         ("開示項目", record["disclosure_item"]),
-        ("mapping_id", record["mapping_id"]),
         ("手動レビュー", "要" if record["manual_review_flag"] else "不要"),
         ("手動レビュー理由", record["manual_review_reason"]),
         ("PDF頁", ", ".join(map(str, record.get("pdf_pages", [])))),
@@ -56,7 +66,7 @@ def generate_report(
         sheet.cell(row_number, 2, value)
         sheet.merge_cells(start_row=row_number, start_column=2, end_row=row_number, end_column=4)
 
-    start = 14
+    start = 4 + len(metadata) + 2
     headers = ["制度", "数値ライン要約", "条文・基準本文", "注意"]
     for column, value in enumerate(headers, start=1):
         cell = sheet.cell(start, column, value)
@@ -81,10 +91,14 @@ def generate_report(
             for item in cell:
                 item.fill = PatternFill("solid", fgColor=PALE_ORANGE)
 
-    financial_row = 20
+    financial_row = start + 6
     sheet.cell(financial_row, 1, "財務数値（百万円）")
     sheet.cell(financial_row, 1).fill = PatternFill("solid", fgColor=NAVY)
     sheet.cell(financial_row, 1).font = Font(color="FFFFFF", bold=True)
+    if period_label:
+        sheet.cell(financial_row, 2, f"対象決算期: {period_label}")
+        sheet.merge_cells(start_row=financial_row, start_column=2, end_row=financial_row, end_column=4)
+
     metrics = [
         ("連結純資産", "net_assets"),
         ("連結売上高", "net_sales"),
@@ -97,15 +111,21 @@ def generate_report(
         sheet.cell(financial_row + offset, 2, financial_data.get(key, 0))
         sheet.cell(financial_row + offset, 2).number_format = "#,##0"
 
-    sheet.cell(27, 1, "免責")
-    sheet.cell(27, 1).fill = PatternFill("solid", fgColor=BLUE)
-    sheet.cell(27, 1).font = Font(color="FFFFFF", bold=True)
-    sheet.merge_cells("B27:D28")
-    sheet["B27"] = (
+    disclaimer_row = financial_row + len(metrics) + 2
+    sheet.cell(disclaimer_row, 1, "免責")
+    sheet.cell(disclaimer_row, 1).fill = PatternFill("solid", fgColor=BLUE)
+    sheet.cell(disclaimer_row, 1).font = Font(color="FFFFFF", bold=True)
+    sheet.merge_cells(
+        start_row=disclaimer_row,
+        start_column=2,
+        end_row=disclaimer_row + 1,
+        end_column=4,
+    )
+    sheet.cell(disclaimer_row, 2, (
         "本資料は判定補助情報です。法的判断を確定せず、最新の法令・JPX規則・"
         "個別事実を必ず確認してください。"
-    )
-    sheet["B27"].fill = PatternFill("solid", fgColor=PALE_YELLOW)
+    ))
+    sheet.cell(disclaimer_row, 2).fill = PatternFill("solid", fgColor=PALE_YELLOW)
 
     widths = [22, 45, 90, 36]
     for column, width in enumerate(widths, start=1):

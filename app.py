@@ -32,6 +32,24 @@ def financial_values_only(source: dict | None) -> dict[str, float]:
     return values
 
 
+def disclosure_option_label(item: dict) -> str:
+    pages = ", ".join(map(str, item.get("pdf_pages", []))) or "-"
+    review_label = "手動レビュー" if item.get("manual_review_flag") else "標準確認"
+    return (
+        f"{item['disclosure_category']}｜{item['disclosure_item']}"
+        f"｜PDF {pages}頁｜{review_label}"
+    )
+
+
+def edinet_source_label(doc_info: dict | None) -> str:
+    doc_info = doc_info or {}
+    source = doc_info.get("doc_description") or doc_info.get("document_title") or "有価証券報告書"
+    submitted = str(doc_info.get("submit_datetime") or "")[:10] or "-"
+    period = doc_info.get("period_label") or "-"
+    doc_id = doc_info.get("doc_id") or "-"
+    return f"取得元: {source} / 提出日: {submitted} / 対象決算期: {period} / docID: {doc_id}"
+
+
 st.set_page_config(
     page_title="Disclosure Support V2",
     page_icon="⚖️",
@@ -103,12 +121,13 @@ if not filtered:
     st.info("検索条件に一致する開示項目がありません。キーワード、区分、手動レビュー条件を変更してください。")
     st.stop()
 
-labels = {
-    f"{item['mapping_id']}｜{item['disclosure_item']}": item
-    for item in filtered
-}
-selected_label = st.sidebar.selectbox("開示項目", list(labels))
-selected = labels[selected_label]
+option_labels = [disclosure_option_label(item) for item in filtered]
+selected_index = st.sidebar.selectbox(
+    "開示項目",
+    range(len(filtered)),
+    format_func=lambda index: option_labels[index],
+)
+selected = filtered[selected_index]
 
 st.sidebar.markdown("---")
 st.sidebar.caption("データ基準")
@@ -136,7 +155,7 @@ with page_assist:
 <div class="event-card">
   <div class="muted">{html.escape(selected['disclosure_category'])}</div>
   <h3>{html.escape(selected['disclosure_item'])}</h3>
-  <span class="badge">{html.escape(selected['mapping_id'])}</span>
+  <span class="badge">{html.escape(selected['disclosure_category'])}</span>
   <span class="badge">PDF {html.escape(pages)}頁</span>
   {manual_badge}
 </div>
@@ -156,6 +175,8 @@ with page_assist:
         st.session_state.edinet_warnings = []
     if "edinet_missing_keys" not in st.session_state:
         st.session_state.edinet_missing_keys = []
+    if "edinet_doc_info" not in st.session_state:
+        st.session_state.edinet_doc_info = {}
 
     with st.expander("会社財務データ・EDINET取得", expanded=False):
         company_query = st.text_input("会社名または証券コード")
@@ -168,22 +189,32 @@ with page_assist:
                         result = get_latest_yuho_doc_id(company_query, max_days=365)
                         if not result:
                             raise ValueError("過去1年間の有価証券報告書が見つかりませんでした。")
-                        doc_id, filer_name = result
-                        fetched_data = extract_financial_data_from_xbrl(doc_id)
+                        doc_id = result["doc_id"]
+                        filer_name = result.get("filer_name", "")
+                        fetched_data = extract_financial_data_from_xbrl(doc_id, result)
                         st.session_state.financial_data = financial_values_only(fetched_data)
                         st.session_state.fetched_company_name = filer_name
+                        st.session_state.edinet_doc_info = fetched_data.get("doc_info", result)
                         st.session_state.edinet_warnings = list(fetched_data.get("warnings", []))
                         st.session_state.edinet_missing_keys = list(fetched_data.get("missing_keys", []))
                         st.success(f"{filer_name} の財務データを取得しました。")
                     except Exception as exc:
                         st.error(f"EDINET取得エラー: {exc}")
 
+        if st.session_state.edinet_doc_info:
+            st.info(edinet_source_label(st.session_state.edinet_doc_info))
         for warning in st.session_state.edinet_warnings:
             st.warning(warning)
         if st.session_state.edinet_missing_keys:
             st.caption("未取得項目: " + "、".join(st.session_state.edinet_missing_keys))
 
         current = st.session_state.financial_data
+        period_label = (st.session_state.edinet_doc_info or {}).get("period_label") or "手入力/未取得"
+        st.caption(f"表示中の決算数値: {period_label}（百万円）")
+        if all(current.get(key, 0.0) == 0.0 for _, key in FINANCIAL_FIELDS):
+            st.warning("財務数値がすべて0です。EDINET取得結果または手入力値を確認してください。")
+        if st.session_state.edinet_missing_keys:
+            st.warning("一部の財務項目をEDINETから取得できませんでした。必要に応じて手入力してください。")
         columns = st.columns(len(FINANCIAL_FIELDS))
         updated = {}
         invalid_fields = []
@@ -244,11 +275,12 @@ with page_assist:
         financial_data,
         company_query=locals().get("company_query", ""),
         fetched_company_name=st.session_state.fetched_company_name,
+        edinet_doc_info=st.session_state.edinet_doc_info,
     )
     st.download_button(
         "判定支援レポートをExcel出力",
         report,
-        file_name=f"disclosure_support_{selected['mapping_id']}.xlsx",
+        file_name=f"disclosure_support_{selected['display_order']:03d}.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         width="stretch",
     )
@@ -257,6 +289,7 @@ with page_list:
     st.subheader("制度比較一覧")
     st.caption(f"現在の絞り込み: {len(filtered)} / {len(records)}項目")
     table = pd.DataFrame(compact_record(item) for item in filtered)
+    table = table.drop(columns=["mapping_id"], errors="ignore")
     st.dataframe(table, hide_index=True, width="stretch", height=620)
 
 with page_sources:

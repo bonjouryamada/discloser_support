@@ -262,10 +262,15 @@ class EdinetFetcherTests(unittest.TestCase):
         xbrl = """
         <xbrli:xbrl>
           <jpdei_cor:CurrentFiscalYearEndDateDEI contextRef="FilingDateInstant">2026-03-31</jpdei_cor:CurrentFiscalYearEndDateDEI>
+          <jpigp_cor:EquityIFRS contextRef="CurrentYearInstantConsolidatedMember" unitRef="JPY">0</jpigp_cor:EquityIFRS>
+          <jpigp_cor:InsuranceRevenueIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">0</jpigp_cor:InsuranceRevenueIFRS>
+          <jpigp_cor:ProfitBeforeTaxIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">0</jpigp_cor:ProfitBeforeTaxIFRS>
+          <jpigp_cor:ProfitAttributableToOwnersOfParentIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">0</jpigp_cor:ProfitAttributableToOwnersOfParentIFRS>
           <jpigp_cor:EquityIFRS contextRef="CurrentYearInstantConsolidatedMember" unitRef="JPY">5941000000000</jpigp_cor:EquityIFRS>
           <jpigp_cor:InsuranceRevenueIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">7229000000000</jpigp_cor:InsuranceRevenueIFRS>
           <jpigp_cor:ProfitBeforeTaxIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">1184000000000</jpigp_cor:ProfitBeforeTaxIFRS>
           <jpigp_cor:ProfitAttributableToOwnersOfParentIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">880000000000</jpigp_cor:ProfitAttributableToOwnersOfParentIFRS>
+          <jppfs_cor:CapitalStock contextRef="CurrentYearInstantNonConsolidatedMember" unitRef="JPY">0</jppfs_cor:CapitalStock>
           <jppfs_cor:CapitalStock contextRef="CurrentYearInstantNonConsolidatedMember" unitRef="JPY">150000000000</jppfs_cor:CapitalStock>
         </xbrli:xbrl>
         """

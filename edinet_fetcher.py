@@ -31,8 +31,7 @@ FINANCIAL_TAG_PATTERNS = {
         "ordinaryrevenues",
         "ordinaryincome",
         "ordinaryincometotal",
-        "revenue",
-        "revenues",
+        "revenueifrs",
         "insurancerevenue",
         "insurancepremiumsandincome",
         "netpremiums",
@@ -122,6 +121,27 @@ def _financial_key_for_tag(name_attr):
             return key
     return None
 
+def _financial_match_score(name_attr):
+    name = name_attr.lower().split(":")[-1]
+    if _is_abstract_tag(name):
+        return None
+    if "ordinaryincomeloss" in name:
+        return ("recurring_profit", 300)
+    best = None
+    for key, patterns in FINANCIAL_TAG_PATTERNS.items():
+        for index, pattern in enumerate(patterns):
+            if pattern == name:
+                priority = 500 - index
+            elif name.endswith(pattern):
+                priority = 350 - index
+            elif pattern in name:
+                priority = 200 - index
+            else:
+                continue
+            if best is None or priority > best[1]:
+                best = (key, priority)
+    return best
+
 def _context_score(context_ref):
     context = (context_ref or "").lower()
     if "currentyear" not in context:
@@ -166,9 +186,10 @@ def _parse_financial_data_from_soup(soup):
 
     for tag in soup.find_all(lambda item: _tag_name_attr(item) and _get_attr(item, "contextRef")):
         name_attr = _tag_name_attr(tag)
-        key = _financial_key_for_tag(name_attr)
-        if not key:
+        match = _financial_match_score(name_attr)
+        if not match:
             continue
+        key, tag_priority = match
 
         context_score = _context_score(_get_attr(tag, "contextRef"))
         if context_score is None:
@@ -181,9 +202,12 @@ def _parse_financial_data_from_soup(soup):
         if val_in_millions is None:
             continue
 
+        nonzero_bonus = 500 if val_in_millions != 0 else 0
+        magnitude_bonus = min(abs(val_in_millions), 10_000_000) / 10_000_000
+        candidate_score = (context_score * 1_000) + (tag_priority * 10) + nonzero_bonus + magnitude_bonus
         previous = parsed_data.get(key)
-        if previous is None or context_score > previous[1]:
-            parsed_data[key] = (val_in_millions, context_score)
+        if previous is None or candidate_score > previous[1]:
+            parsed_data[key] = (val_in_millions, candidate_score)
 
     return parsed_data
 
@@ -258,10 +282,16 @@ def _format_financial_data(parsed_data, doc_info=None):
     financial_data["missing_keys"] = missing_keys
     financial_data["doc_info"] = doc_info or {}
     financial_data["doc_info_label"] = _format_doc_info(doc_info)
-    financial_data["warnings"] = [
+    warnings = [
         "EDINET XBRLで値を取得できなかった項目があります: "
         + "、".join(FINANCIAL_LABELS.get(key, key) for key in missing_keys)
     ] if missing_keys else []
+    if parsed_data and all(financial_data.get(key, 0) == 0 for key in FINANCIAL_KEYS):
+        warnings.append(
+            "EDINET XBRLで候補タグは見つかりましたが、値がすべて0です。"
+            "財務諸表タグの形式が未対応の可能性があります。"
+        )
+    financial_data["warnings"] = warnings
     return financial_data
 
 def _extract_financial_data_from_zip_bytes(zip_bytes, doc_info=None):

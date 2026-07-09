@@ -24,6 +24,13 @@ def make_xbrl_zip(html):
     return payload.getvalue()
 
 
+def make_zip_with_file(path, content):
+    payload = io.BytesIO()
+    with zipfile.ZipFile(payload, "w") as z:
+        z.writestr(path, content)
+    return payload.getvalue()
+
+
 class EdinetFetcherTests(unittest.TestCase):
     def test_sec_code_matches_exact_five_digits_and_four_digit_input(self):
         payload = {
@@ -250,6 +257,30 @@ class EdinetFetcherTests(unittest.TestCase):
 
         self.assertEqual(result["net_sales"], 123)
         self.assertEqual(result["recurring_profit"], 45)
+
+    def test_raw_xbrl_element_names_are_parsed_for_ifrs_insurance_filings(self):
+        xbrl = """
+        <xbrli:xbrl>
+          <jpdei_cor:CurrentFiscalYearEndDateDEI contextRef="FilingDateInstant">2026-03-31</jpdei_cor:CurrentFiscalYearEndDateDEI>
+          <jpigp_cor:EquityIFRS contextRef="CurrentYearInstantConsolidatedMember" unitRef="JPY">5941000000000</jpigp_cor:EquityIFRS>
+          <jpigp_cor:InsuranceRevenueIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">7229000000000</jpigp_cor:InsuranceRevenueIFRS>
+          <jpigp_cor:ProfitBeforeTaxIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">1184000000000</jpigp_cor:ProfitBeforeTaxIFRS>
+          <jpigp_cor:ProfitAttributableToOwnersOfParentIFRS contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">880000000000</jpigp_cor:ProfitAttributableToOwnersOfParentIFRS>
+          <jppfs_cor:CapitalStock contextRef="CurrentYearInstantNonConsolidatedMember" unitRef="JPY">150000000000</jppfs_cor:CapitalStock>
+        </xbrli:xbrl>
+        """
+
+        result = edinet_fetcher._extract_financial_data_from_zip_bytes(
+            make_zip_with_file("XBRL/PublicDoc/test.xbrl", xbrl)
+        )
+
+        self.assertEqual(result["net_assets"], 5_941_000)
+        self.assertEqual(result["net_sales"], 7_229_000)
+        self.assertEqual(result["recurring_profit"], 1_184_000)
+        self.assertEqual(result["net_income"], 880_000)
+        self.assertEqual(result["capital_stock"], 150_000)
+        self.assertEqual(result["doc_info"]["period_label"], "2026年3月期")
+        self.assertEqual(result["missing_keys"], [])
 
     def test_missing_financial_values_are_reported_separately_from_real_zero(self):
         html = """

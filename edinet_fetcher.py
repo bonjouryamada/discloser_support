@@ -17,19 +17,42 @@ FINANCIAL_KEYS = [
 ]
 
 FINANCIAL_TAG_PATTERNS = {
-    "net_assets": ["netassets", "totalequity"],
+    "net_assets": [
+        "netassets",
+        "totalequity",
+        "equityattributabletoownersofparent",
+        "equityifrs",
+        "totalnetassets",
+    ],
     "net_sales": [
         "netsales",
         "operatingrevenue",
         "operatingrevenues",
         "ordinaryrevenues",
         "ordinaryincome",
+        "ordinaryincometotal",
         "revenue",
         "revenues",
+        "insurancerevenue",
         "insurancepremiumsandincome",
+        "netpremiums",
+        "insurancepremium",
     ],
-    "recurring_profit": ["ordinaryprofit", "ordinaryincomeloss", "recurringprofit"],
-    "net_income": ["profitlossattributabletoownersofparent", "profitattributabletoownersofparent", "netincomeloss", "netincome"],
+    "recurring_profit": [
+        "ordinaryprofit",
+        "ordinaryincomeloss",
+        "recurringprofit",
+        "profitbeforetax",
+        "profitlossbeforetax",
+        "incomebeforeincometaxes",
+    ],
+    "net_income": [
+        "profitlossattributabletoownersofparent",
+        "profitattributabletoownersofparent",
+        "profitlossattributabletoownersoftheparent",
+        "netincomeloss",
+        "netincome",
+    ],
     "capital_stock": ["capitalstock"],
 }
 
@@ -75,6 +98,18 @@ def _sec_code_matches(input_value, edinet_sec_code):
 
 def _is_abstract_tag(name_attr):
     return name_attr.lower().split(":")[-1].endswith("abstract")
+
+def _tag_name_attr(tag):
+    return tag.get("name") or getattr(tag, "name", "") or ""
+
+def _get_attr(tag, attr_name):
+    if tag.has_attr(attr_name):
+        return tag.get(attr_name)
+    attr_lower = attr_name.lower()
+    for key, value in tag.attrs.items():
+        if str(key).lower() == attr_lower:
+            return value
+    return None
 
 def _financial_key_for_tag(name_attr):
     name = name_attr.lower().split(":")[-1]
@@ -129,13 +164,13 @@ def _value_in_millions(tag):
 def _parse_financial_data_from_soup(soup):
     parsed_data = {}
 
-    for tag in soup.find_all(lambda item: item.get("name") and item.get("contextref")):
-        name_attr = tag.get("name", "")
+    for tag in soup.find_all(lambda item: _tag_name_attr(item) and _get_attr(item, "contextRef")):
+        name_attr = _tag_name_attr(tag)
         key = _financial_key_for_tag(name_attr)
         if not key:
             continue
 
-        context_score = _context_score(tag.get("contextref", ""))
+        context_score = _context_score(_get_attr(tag, "contextRef"))
         if context_score is None:
             continue
 
@@ -179,8 +214,8 @@ def _extract_doc_info_from_soup(soup):
         "period_end": ["currentfiscalyearenddatedei", "currentperiodenddatedei"],
         "document_title": ["documenttitlecoverpage"],
     }
-    for tag in soup.find_all(lambda item: item.get("name")):
-        name = tag.get("name", "").lower().split(":")[-1]
+    for tag in soup.find_all(lambda item: _tag_name_attr(item)):
+        name = _tag_name_attr(tag).lower().split(":")[-1]
         text = tag.get_text(strip=True)
         if not text:
             continue
@@ -234,10 +269,14 @@ def _extract_financial_data_from_zip_bytes(zip_bytes, doc_info=None):
     merged_doc_info = dict(doc_info or {})
 
     with zipfile.ZipFile(io.BytesIO(zip_bytes)) as z:
-        htm_files = [f for f in z.namelist() if f.startswith("XBRL/PublicDoc/") and f.endswith(".htm")]
+        xbrl_files = [
+            f for f in z.namelist()
+            if f.startswith("XBRL/PublicDoc/")
+            and f.lower().endswith((".htm", ".html", ".xbrl", ".xml"))
+        ]
 
-        for htm_file in htm_files:
-            html_content = z.read(htm_file)
+        for xbrl_file in xbrl_files:
+            html_content = z.read(xbrl_file)
             soup = BeautifulSoup(html_content, "html.parser")
             merged_doc_info = _merge_doc_info(merged_doc_info, _extract_doc_info_from_soup(soup))
             for key, candidate in _parse_financial_data_from_soup(soup).items():

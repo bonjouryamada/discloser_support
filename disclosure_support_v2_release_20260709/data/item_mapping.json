@@ -1,0 +1,2665 @@
+{
+    "schema_version":  "2.0",
+    "generated_at":  "2026-06-11T23:32:56+09:00",
+    "source_pdf_reference":  "data/pdf_reference.json",
+    "reference_workbook":  "C:\\Users\\sakit\\Downloads\\適時開示チェックシート_2025年4月1日版.xlsx",
+    "mapping_id_scheme":  "区分コード + PDF項目番号（ゼロ埋め2桁）。項目名・基準ブック行番号の変更に依存しない。",
+    "record_count":  101,
+    "base_candidate_count":  62,
+    "validation":  {
+                       "mapping_id_duplicates":  0,
+                       "assigned_base_row_count":  62,
+                       "base_row_duplicate_assignments":  0,
+                       "base_unassigned_count":  0
+                   },
+    "base_candidates":  [
+                            {
+                                "base_row":  3,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "発行する株式、処分する自己株式、発行する新株予約権、処分する自己新株予約権を引き受ける者の募集又は株式、新株予約権の売出し",
+                                "normalized_parent_key":  "発行する株式処分する自己株式発行する新株予約権処分する自己新株予約権を引き受ける者の募集又は株式新株予約権の売出し",
+                                "assigned_mapping_id":  "LC-DEC-01"
+                            },
+                            {
+                                "base_row":  4,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "事業の全部又は一部の譲渡又は譲受け\n 【譲渡の場合】",
+                                "normalized_parent_key":  "事業の全部又は一部の譲渡又は譲受け",
+                                "assigned_mapping_id":  "LC-DEC-13"
+                            },
+                            {
+                                "base_row":  5,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "事業の全部又は一部の譲渡又は譲受け\n 【譲受けの場合】",
+                                "normalized_parent_key":  "事業の全部又は一部の譲渡又は譲受け",
+                                "assigned_mapping_id":  "LC-DEC-13"
+                            },
+                            {
+                                "base_row":  6,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "新製品又は新技術の企業化",
+                                "normalized_parent_key":  "新製品又は新技術の企業化",
+                                "assigned_mapping_id":  "LC-DEC-15"
+                            },
+                            {
+                                "base_row":  7,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "業務上の提携又は業務上の提携の解消",
+                                "normalized_parent_key":  "業務上の提携又は業務上の提携の解消",
+                                "assigned_mapping_id":  "LC-DEC-16"
+                            },
+                            {
+                                "base_row":  8,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "業務上の提携又は業務上の提携の解消\n 【資本提携を伴う場合の追加確認項目】",
+                                "normalized_parent_key":  "業務上の提携又は業務上の提携の解消",
+                                "assigned_mapping_id":  "LC-DEC-16"
+                            },
+                            {
+                                "base_row":  9,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "業務上の提携又は業務上の提携の解消\n 【合弁会社の設立を伴う場合の追加確認項目】",
+                                "normalized_parent_key":  "業務上の提携又は業務上の提携の解消",
+                                "assigned_mapping_id":  "LC-DEC-16"
+                            },
+                            {
+                                "base_row":  10,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "子会社等の異動を伴う株式又は持分の譲渡又は取得その他の子会社等の異動を伴う事項",
+                                "normalized_parent_key":  "子会社等の異動を伴う株式又は持分の譲渡又は取得その他の子会社等の異動を伴う事項",
+                                "assigned_mapping_id":  "LC-DEC-17"
+                            },
+                            {
+                                "base_row":  11,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "子会社等の異動を伴う株式又は持分の譲渡又は取得その他の子会社等の異動を伴う事項\n【子会社取得の場合の追加確認項目】",
+                                "normalized_parent_key":  "子会社等の異動を伴う株式又は持分の譲渡又は取得その他の子会社等の異動を伴う事項",
+                                "assigned_mapping_id":  "LC-DEC-17"
+                            },
+                            {
+                                "base_row":  12,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【固定資産の譲渡の場合】",
+                                "normalized_parent_key":  "固定資産の譲渡又は取得リースによる固定資産の賃貸借",
+                                "assigned_mapping_id":  "LC-DEC-18"
+                            },
+                            {
+                                "base_row":  13,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【固定資産の取得の場合】",
+                                "normalized_parent_key":  "固定資産の譲渡又は取得リースによる固定資産の賃貸借",
+                                "assigned_mapping_id":  "LC-DEC-18"
+                            },
+                            {
+                                "base_row":  14,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【リースによる固定資産の賃貸借の場合】",
+                                "normalized_parent_key":  "固定資産の譲渡又は取得リースによる固定資産の賃貸借",
+                                "assigned_mapping_id":  "LC-DEC-18"
+                            },
+                            {
+                                "base_row":  15,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "事業の全部又は一部の休止又は廃止",
+                                "normalized_parent_key":  "事業の全部又は一部の休止又は廃止",
+                                "assigned_mapping_id":  "LC-DEC-19"
+                            },
+                            {
+                                "base_row":  16,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "新たな事業の開始",
+                                "normalized_parent_key":  "新たな事業の開始",
+                                "assigned_mapping_id":  "LC-DEC-22"
+                            },
+                            {
+                                "base_row":  17,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "人員削減等の合理化",
+                                "normalized_parent_key":  "人員削減等の合理化",
+                                "assigned_mapping_id":  "LC-DEC-24"
+                            },
+                            {
+                                "base_row":  18,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "財務上の特約が付された金銭消費貸借契約の締結、財務上の特約が付された社債の発行又は財務上の特約の内容の変更等",
+                                "normalized_parent_key":  "財務上の特約が付された金銭消費貸借契約の締結財務上の特約が付された社債の発行又は財務上の特約の内容の変更等",
+                                "assigned_mapping_id":  "LC-DEC-25"
+                            },
+                            {
+                                "base_row":  19,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "特定調停法に基づく特定調停手続による調停の申立て",
+                                "normalized_parent_key":  "特定調停法に基づく特定調停手続による調停の申立て",
+                                "assigned_mapping_id":  "LC-DEC-30"
+                            },
+                            {
+                                "base_row":  20,
+                                "base_category":  "上場会社・決定事実",
+                                "base_item":  "定款の変更",
+                                "normalized_parent_key":  "定款の変更",
+                                "assigned_mapping_id":  "LC-DEC-37"
+                            },
+                            {
+                                "base_row":  21,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "災害に起因する損害又は業務遂行の過程で生じた損害",
+                                "normalized_parent_key":  "災害に起因する損害又は業務遂行の過程で生じた損害",
+                                "assigned_mapping_id":  "LC-OCC-01"
+                            },
+                            {
+                                "base_row":  22,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "訴訟の提起又は判決等\n 【訴えが提起された場合】",
+                                "normalized_parent_key":  "訴訟の提起又は判決等",
+                                "assigned_mapping_id":  "LC-OCC-04"
+                            },
+                            {
+                                "base_row":  23,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "訴訟の提起又は判決等\n 【判決があった場合、訴訟の全部又は一部が完結した場合】",
+                                "normalized_parent_key":  "訴訟の提起又は判決等",
+                                "assigned_mapping_id":  "LC-OCC-04"
+                            },
+                            {
+                                "base_row":  24,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "仮処分命令の申立て又は決定等\n 【申立てがなされた場合】",
+                                "normalized_parent_key":  "仮処分命令の申立て又は決定等",
+                                "assigned_mapping_id":  "LC-OCC-05"
+                            },
+                            {
+                                "base_row":  25,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "仮処分命令の申立て又は決定等\n 【裁判があった場合、申立てに係る手続の全部又は一部が完結した場合】",
+                                "normalized_parent_key":  "仮処分命令の申立て又は決定等",
+                                "assigned_mapping_id":  "LC-OCC-05"
+                            },
+                            {
+                                "base_row":  26,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発\n 【法令に基づく処分を受けた場合】",
+                                "normalized_parent_key":  "免許の取消し事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発",
+                                "assigned_mapping_id":  "LC-OCC-06"
+                            },
+                            {
+                                "base_row":  27,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発\n 【法令違反に係る告発がなされた場合】",
+                                "normalized_parent_key":  "免許の取消し事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発",
+                                "assigned_mapping_id":  "LC-OCC-06"
+                            },
+                            {
+                                "base_row":  28,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "債権の取立不能又は取立遅延",
+                                "normalized_parent_key":  "債権の取立不能又は取立遅延",
+                                "assigned_mapping_id":  "LC-OCC-11"
+                            },
+                            {
+                                "base_row":  29,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "取引先との取引停止",
+                                "normalized_parent_key":  "取引先との取引停止",
+                                "assigned_mapping_id":  "LC-OCC-12"
+                            },
+                            {
+                                "base_row":  30,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "債務免除等の金融支援",
+                                "normalized_parent_key":  "債務免除等の金融支援",
+                                "assigned_mapping_id":  "LC-OCC-13"
+                            },
+                            {
+                                "base_row":  31,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "資源の発見",
+                                "normalized_parent_key":  "資源の発見",
+                                "assigned_mapping_id":  "LC-OCC-14"
+                            },
+                            {
+                                "base_row":  32,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "保有有価証券の含み損",
+                                "normalized_parent_key":  "保有有価証券の含み損",
+                                "assigned_mapping_id":  "LC-OCC-18"
+                            },
+                            {
+                                "base_row":  33,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "社債に係る期限の利益の喪失",
+                                "normalized_parent_key":  "社債に係る期限の利益の喪失",
+                                "assigned_mapping_id":  "LC-OCC-19"
+                            },
+                            {
+                                "base_row":  34,
+                                "base_category":  "上場会社・発生事実",
+                                "base_item":  "財務上の特約が付された金銭消費貸借契約に係る財務上の特約に定める事由の発生",
+                                "normalized_parent_key":  "財務上の特約が付された金銭消費貸借契約に係る財務上の特約に定める事由の発生",
+                                "assigned_mapping_id":  "LC-OCC-20"
+                            },
+                            {
+                                "base_row":  35,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等の合併等の組織再編行為",
+                                "normalized_parent_key":  "子会社等の合併等の組織再編行為",
+                                "assigned_mapping_id":  "SUB-DEC-01"
+                            },
+                            {
+                                "base_row":  36,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等の事業の全部又は一部の譲渡又は譲受け",
+                                "normalized_parent_key":  "子会社等の事業の全部又は一部の譲渡又は譲受け",
+                                "assigned_mapping_id":  "SUB-DEC-03"
+                            },
+                            {
+                                "base_row":  37,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等の解散(合併による解散を除く。)",
+                                "normalized_parent_key":  "子会社等の解散合併による解散を除く",
+                                "assigned_mapping_id":  "SUB-DEC-04"
+                            },
+                            {
+                                "base_row":  38,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における新製品又は新技術の企業化",
+                                "normalized_parent_key":  "子会社等の新製品又は新技術の企業化",
+                                "assigned_mapping_id":  "SUB-DEC-05"
+                            },
+                            {
+                                "base_row":  39,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における業務上の提携又は業務上の提携の解消",
+                                "normalized_parent_key":  "子会社等の業務上の提携又は業務上の提携の解消",
+                                "assigned_mapping_id":  "SUB-DEC-06"
+                            },
+                            {
+                                "base_row":  40,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における業務上の提携又は業務上の提携の解消\n 【資本提携を伴う場合の追加確認項目】",
+                                "normalized_parent_key":  "子会社等の業務上の提携又は業務上の提携の解消",
+                                "assigned_mapping_id":  "SUB-DEC-06"
+                            },
+                            {
+                                "base_row":  41,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における業務上の提携又は業務上の提携の解消\n 【合弁会社の設立を伴う場合の追加確認項目】",
+                                "normalized_parent_key":  "子会社等の業務上の提携又は業務上の提携の解消",
+                                "assigned_mapping_id":  "SUB-DEC-06"
+                            },
+                            {
+                                "base_row":  42,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における孫会社の異動を伴う株式又は持分の譲渡又は取得その他の孫会社の異動を伴う事項",
+                                "normalized_parent_key":  "子会社等の孫会社の異動を伴う株式又は持分の譲渡又は取得その他の孫会社の異動を伴う事項",
+                                "assigned_mapping_id":  "SUB-DEC-07"
+                            },
+                            {
+                                "base_row":  43,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における孫会社の異動を伴う株式又は持分の譲渡又は取得その他の孫会社の異動を伴う事項\n 【孫会社取得の場合の追加確認項目】",
+                                "normalized_parent_key":  "子会社等の孫会社の異動を伴う株式又は持分の譲渡又は取得その他の孫会社の異動を伴う事項",
+                                "assigned_mapping_id":  "SUB-DEC-07"
+                            },
+                            {
+                                "base_row":  44,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【固定資産の譲渡の場合】",
+                                "normalized_parent_key":  "子会社等の固定資産の譲渡又は取得リースによる固定資産の賃貸借",
+                                "assigned_mapping_id":  "SUB-DEC-08"
+                            },
+                            {
+                                "base_row":  45,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【固定資産の取得の場合】",
+                                "normalized_parent_key":  "子会社等の固定資産の譲渡又は取得リースによる固定資産の賃貸借",
+                                "assigned_mapping_id":  "SUB-DEC-08"
+                            },
+                            {
+                                "base_row":  46,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【リースによる固定資産の賃貸借の場合】",
+                                "normalized_parent_key":  "子会社等の固定資産の譲渡又は取得リースによる固定資産の賃貸借",
+                                "assigned_mapping_id":  "SUB-DEC-08"
+                            },
+                            {
+                                "base_row":  47,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等の事業の全部又は一部の休止又は廃止",
+                                "normalized_parent_key":  "子会社等の事業の全部又は一部の休止又は廃止",
+                                "assigned_mapping_id":  "SUB-DEC-09"
+                            },
+                            {
+                                "base_row":  48,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における新たな事業の開始",
+                                "normalized_parent_key":  "子会社等の新たな事業の開始",
+                                "assigned_mapping_id":  "SUB-DEC-11"
+                            },
+                            {
+                                "base_row":  49,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における財務上の特約が付された金銭消費貸借契約の締結、財務上の特約が付された社債の発行又は財務上の特約の内容の変更等",
+                                "normalized_parent_key":  "子会社等の財務上の特約が付された金銭消費貸借契約の締結財務上の特約が付された社債の発行又は財務上の特約の内容の変更等",
+                                "assigned_mapping_id":  "SUB-DEC-12"
+                            },
+                            {
+                                "base_row":  50,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等の商号又は名称の変更",
+                                "normalized_parent_key":  "子会社等の商号又は名称の変更",
+                                "assigned_mapping_id":  "SUB-DEC-13"
+                            },
+                            {
+                                "base_row":  51,
+                                "base_category":  "子会社等・決定事実",
+                                "base_item":  "子会社等における特定調停法に基づく特定調停手続による調停の申立て",
+                                "normalized_parent_key":  "子会社等の特定調停法に基づく特定調停手続による調停の申立て",
+                                "assigned_mapping_id":  "SUB-DEC-15"
+                            },
+                            {
+                                "base_row":  52,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における災害に起因する損害又は業務遂行の過程で生じた損害",
+                                "normalized_parent_key":  "子会社等の災害に起因する損害又は業務遂行の過程で生じた損害",
+                                "assigned_mapping_id":  "SUB-OCC-01"
+                            },
+                            {
+                                "base_row":  53,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における訴訟の提起又は判決等\n 【訴えが提起された場合】",
+                                "normalized_parent_key":  "子会社等の訴訟の提起又は判決等",
+                                "assigned_mapping_id":  "SUB-OCC-02"
+                            },
+                            {
+                                "base_row":  54,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における訴訟の提起又は判決等\n 【判決があった場合、訴訟の全部又は一部が完結した場合】",
+                                "normalized_parent_key":  "子会社等の訴訟の提起又は判決等",
+                                "assigned_mapping_id":  "SUB-OCC-02"
+                            },
+                            {
+                                "base_row":  55,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における仮処分命令の申立て又は決定等\n 【申立てがなされた場合】",
+                                "normalized_parent_key":  "子会社等の仮処分命令の申立て又は決定等",
+                                "assigned_mapping_id":  "SUB-OCC-03"
+                            },
+                            {
+                                "base_row":  56,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における仮処分命令の申立て又は決定等\n 【裁判があった場合、申立てに係る手続の全部又は一部が完結した場合】",
+                                "normalized_parent_key":  "子会社等の仮処分命令の申立て又は決定等",
+                                "assigned_mapping_id":  "SUB-OCC-03"
+                            },
+                            {
+                                "base_row":  57,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発\n 【法令に基づく処分を受けた場合】",
+                                "normalized_parent_key":  "子会社等の免許の取消し事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発",
+                                "assigned_mapping_id":  "SUB-OCC-04"
+                            },
+                            {
+                                "base_row":  58,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発\n 【法令違反に係る告発がなされた場合】",
+                                "normalized_parent_key":  "子会社等の免許の取消し事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発",
+                                "assigned_mapping_id":  "SUB-OCC-04"
+                            },
+                            {
+                                "base_row":  59,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における債権の取立不能又は取立遅延",
+                                "normalized_parent_key":  "子会社等の債権の取立不能又は取立遅延",
+                                "assigned_mapping_id":  "SUB-OCC-08"
+                            },
+                            {
+                                "base_row":  60,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における取引先との取引停止",
+                                "normalized_parent_key":  "子会社等の取引先との取引停止",
+                                "assigned_mapping_id":  "SUB-OCC-09"
+                            },
+                            {
+                                "base_row":  61,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における債務免除等の金融支援",
+                                "normalized_parent_key":  "子会社等の債務免除等の金融支援",
+                                "assigned_mapping_id":  "SUB-OCC-10"
+                            },
+                            {
+                                "base_row":  62,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における資源の発見",
+                                "normalized_parent_key":  "子会社等の資源の発見",
+                                "assigned_mapping_id":  "SUB-OCC-11"
+                            },
+                            {
+                                "base_row":  63,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における社債に係る期限の利益の喪失",
+                                "normalized_parent_key":  "子会社等の社債に係る期限の利益の喪失",
+                                "assigned_mapping_id":  "SUB-OCC-12"
+                            },
+                            {
+                                "base_row":  64,
+                                "base_category":  "子会社等・発生事実",
+                                "base_item":  "子会社等における財務上の特約が付された金銭消費貸借契約に係る財務上の特約",
+                                "normalized_parent_key":  "子会社等の財務上の特約が付された金銭消費貸借契約に係る財務上の特約",
+                                "assigned_mapping_id":  "SUB-OCC-13"
+                            }
+                        ],
+    "records":  [
+                    {
+                        "mapping_id":  "LC-DEC-01",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "1",
+                        "pdf_item":  "発行する株式、処分する自己株式、発行する新株予約権、処分する自己新株予約権を引き受ける者の募集又は株式、新株予約権の売出し",
+                        "normalized_key":  "発行する株式処分する自己株式発行する新株予約権処分する自己新株予約権を引き受ける者の募集又は株式新株予約権の売出し",
+                        "pdf_pages":  [
+                                          1,
+                                          2
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "発行する株式、処分する自己株式、発行する新株予約権、処分する自己新株予約権を引き受ける者の募集又は株式、新株予約権の売出し"
+                                       ],
+                        "base_rows":  [
+                                          3
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-02",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "2",
+                        "pdf_item":  "発行登録及び需要状況調査の開始",
+                        "normalized_key":  "発行登録及び需要状況調査の開始",
+                        "pdf_pages":  [
+                                          3
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-03",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "3",
+                        "pdf_item":  "資本金の額の減少",
+                        "normalized_key":  "資本金の額の減少",
+                        "pdf_pages":  [
+                                          3
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-04",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "4",
+                        "pdf_item":  "資本準備金又は利益準備金の額の減少",
+                        "normalized_key":  "資本準備金又は利益準備金の額の減少",
+                        "pdf_pages":  [
+                                          3
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-05",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "5",
+                        "pdf_item":  "自己株式の取得",
+                        "normalized_key":  "自己株式の取得",
+                        "pdf_pages":  [
+                                          3
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-06",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "6",
+                        "pdf_item":  "株式無償割当て又は新株予約権無償割当て",
+                        "normalized_key":  "株式無償割当て又は新株予約権無償割当て",
+                        "pdf_pages":  [
+                                          3,
+                                          4
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-07",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "7",
+                        "pdf_item":  "新株予約権無償割当てにかかる発行登録及び需要状況・権利行使の見込み調査の開始",
+                        "normalized_key":  "新株予約権無償割当てにかかる発行登録及び需要状況権利行使の見込み調査の開始",
+                        "pdf_pages":  [
+                                          4
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-08",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "8",
+                        "pdf_item":  "株式の分割又は併合",
+                        "normalized_key":  "株式の分割又は併合",
+                        "pdf_pages":  [
+                                          4
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-09",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "9",
+                        "pdf_item":  "剰余金の配当",
+                        "normalized_key":  "剰余金の配当",
+                        "pdf_pages":  [
+                                          4
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-10",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "10",
+                        "pdf_item":  "合併等の組織再編行為",
+                        "normalized_key":  "合併等の組織再編行為",
+                        "pdf_pages":  [
+                                          4,
+                                          5,
+                                          6,
+                                          7
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-11",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "11",
+                        "pdf_item":  "公開買付け又は自己株式の公開買付け",
+                        "normalized_key":  "公開買付け又は自己株式の公開買付け",
+                        "pdf_pages":  [
+                                          7,
+                                          8
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-12",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "12",
+                        "pdf_item":  "公開買付けに関する意見表明等",
+                        "normalized_key":  "公開買付けに関する意見表明等",
+                        "pdf_pages":  [
+                                          8
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-13",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "13",
+                        "pdf_item":  "事業の全部又は一部の譲渡又は譲受け",
+                        "normalized_key":  "事業の全部又は一部の譲渡又は譲受け",
+                        "pdf_pages":  [
+                                          8,
+                                          9,
+                                          10
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "事業の全部又は一部の譲渡又は譲受け\n 【譲渡の場合】",
+                                           "事業の全部又は一部の譲渡又は譲受け\n 【譲受けの場合】"
+                                       ],
+                        "base_rows":  [
+                                          4,
+                                          5
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-14",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "14",
+                        "pdf_item":  "解散（合併による解散を除く。）",
+                        "normalized_key":  "解散合併による解散を除く",
+                        "pdf_pages":  [
+                                          10
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-15",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "15",
+                        "pdf_item":  "新製品又は新技術の企業化",
+                        "normalized_key":  "新製品又は新技術の企業化",
+                        "pdf_pages":  [
+                                          10
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "新製品又は新技術の企業化"
+                                       ],
+                        "base_rows":  [
+                                          6
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-16",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "16",
+                        "pdf_item":  "業務上の提携又は業務上の提携の解消",
+                        "normalized_key":  "業務上の提携又は業務上の提携の解消",
+                        "pdf_pages":  [
+                                          11,
+                                          12,
+                                          13
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "業務上の提携又は業務上の提携の解消",
+                                           "業務上の提携又は業務上の提携の解消\n 【資本提携を伴う場合の追加確認項目】",
+                                           "業務上の提携又は業務上の提携の解消\n 【合弁会社の設立を伴う場合の追加確認項目】"
+                                       ],
+                        "base_rows":  [
+                                          7,
+                                          8,
+                                          9
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（3行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-17",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "17",
+                        "pdf_item":  "子会社等の異動を伴う株式又は持分の譲渡又は取得その他の子会社等の異動を伴う事項",
+                        "normalized_key":  "子会社等の異動を伴う株式又は持分の譲渡又は取得その他の子会社等の異動を伴う事項",
+                        "pdf_pages":  [
+                                          14,
+                                          15,
+                                          16
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "子会社等の異動を伴う株式又は持分の譲渡又は取得その他の子会社等の異動を伴う事項",
+                                           "子会社等の異動を伴う株式又は持分の譲渡又は取得その他の子会社等の異動を伴う事項\n【子会社取得の場合の追加確認項目】"
+                                       ],
+                        "base_rows":  [
+                                          10,
+                                          11
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-18",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "18",
+                        "pdf_item":  "固定資産の譲渡又は取得、リースによる固定資産の賃貸借",
+                        "normalized_key":  "固定資産の譲渡又は取得リースによる固定資産の賃貸借",
+                        "pdf_pages":  [
+                                          16,
+                                          17
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【固定資産の譲渡の場合】",
+                                           "固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【固定資産の取得の場合】",
+                                           "固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【リースによる固定資産の賃貸借の場合】"
+                                       ],
+                        "base_rows":  [
+                                          12,
+                                          13,
+                                          14
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（3行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-19",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "19",
+                        "pdf_item":  "事業の全部又は一部の休止又は廃止",
+                        "normalized_key":  "事業の全部又は一部の休止又は廃止",
+                        "pdf_pages":  [
+                                          17,
+                                          18
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "事業の全部又は一部の休止又は廃止"
+                                       ],
+                        "base_rows":  [
+                                          15
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-20",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "20",
+                        "pdf_item":  "上場廃止申請",
+                        "normalized_key":  "上場廃止申請",
+                        "pdf_pages":  [
+                                          18
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-21",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "21",
+                        "pdf_item":  "破産手続開始、再生手続開始又は更生手続開始の申立て",
+                        "normalized_key":  "破産手続開始再生手続開始又は更生手続開始の申立て",
+                        "pdf_pages":  [
+                                          18
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-22",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "22",
+                        "pdf_item":  "新たな事業の開始",
+                        "normalized_key":  "新たな事業の開始",
+                        "pdf_pages":  [
+                                          18,
+                                          19
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "新たな事業の開始"
+                                       ],
+                        "base_rows":  [
+                                          16
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-23",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "23",
+                        "pdf_item":  "代表取締役又は代表執行役の異動",
+                        "normalized_key":  "代表取締役又は代表執行役の異動",
+                        "pdf_pages":  [
+                                          19
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-24",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "24",
+                        "pdf_item":  "人員削減等の合理化",
+                        "normalized_key":  "人員削減等の合理化",
+                        "pdf_pages":  [
+                                          19,
+                                          20
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "人員削減等の合理化"
+                                       ],
+                        "base_rows":  [
+                                          17
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-25",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "25",
+                        "pdf_item":  "財務上の特約が付された金銭消費貸借契約の締結、財務上の特約が付された社債の発行又は財務上の特約の内容の変更等",
+                        "normalized_key":  "財務上の特約が付された金銭消費貸借契約の締結財務上の特約が付された社債の発行又は財務上の特約の内容の変更等",
+                        "pdf_pages":  [
+                                          20,
+                                          21,
+                                          22
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "財務上の特約が付された金銭消費貸借契約の締結、財務上の特約が付された社債の発行又は財務上の特約の内容の変更等"
+                                       ],
+                        "base_rows":  [
+                                          18
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-26",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "26",
+                        "pdf_item":  "商号又は名称の変更",
+                        "normalized_key":  "商号又は名称の変更",
+                        "pdf_pages":  [
+                                          22
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-27",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "27",
+                        "pdf_item":  "単元株式数の変更又は単元株式数の定めの廃止若しくは新設",
+                        "normalized_key":  "単元株式数の変更又は単元株式数の定めの廃止若しくは新設",
+                        "pdf_pages":  [
+                                          22
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-28",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "28",
+                        "pdf_item":  "決算期変更（事業年度の末日の変更）",
+                        "normalized_key":  "決算期変更事業年度の末日の変更",
+                        "pdf_pages":  [
+                                          22
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-29",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "29",
+                        "pdf_item":  "債務超過又は預金等の払戻の停止のおそれがある旨の内閣総理大臣への申出（預金保険法第74条第５項の規定による申出）",
+                        "normalized_key":  "債務超過又は預金等の払戻の停止のおそれがある旨の内閣総理大臣への申出預金保険法第74条第5項の規定による申出",
+                        "pdf_pages":  [
+                                          22
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-30",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "30",
+                        "pdf_item":  "特定調停法に基づく特定調停手続による調停の申立て",
+                        "normalized_key":  "特定調停法に基づく特定調停手続による調停の申立て",
+                        "pdf_pages":  [
+                                          22
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "特定調停法に基づく特定調停手続による調停の申立て"
+                                       ],
+                        "base_rows":  [
+                                          19
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-31",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "31",
+                        "pdf_item":  "上場債券等の繰上償還又は社債権者集会の招集その他権利に係る重要な事項",
+                        "normalized_key":  "上場債券等の繰上償還又は社債権者集会の招集その他権利に係る重要な事項",
+                        "pdf_pages":  [
+                                          23
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-32",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "32",
+                        "pdf_item":  "公認会計士等の異動",
+                        "normalized_key":  "公認会計士等の異動",
+                        "pdf_pages":  [
+                                          23,
+                                          24
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-33",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "33",
+                        "pdf_item":  "継続企業の前提に関する事項の注記",
+                        "normalized_key":  "継続企業の前提に関する事項の注記",
+                        "pdf_pages":  [
+                                          24
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-34",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "34",
+                        "pdf_item":  "有価証券報告書・半期報告書の提出期限延長に関する承認申請書の提出",
+                        "normalized_key":  "有価証券報告書半期報告書の提出期限延長に関する承認申請書の提出",
+                        "pdf_pages":  [
+                                          24
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-35",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "35",
+                        "pdf_item":  "株式事務代行機関への株式事務の委託の取止め",
+                        "normalized_key":  "株式事務代行機関への株式事務の委託の取止め",
+                        "pdf_pages":  [
+                                          24
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-36",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "36",
+                        "pdf_item":  "開示すべき重要な不備、評価結果不表明の旨を記載する内部統制報告書の提出",
+                        "normalized_key":  "開示すべき重要な不備評価結果不表明の旨を記載する内部統制報告書の提出",
+                        "pdf_pages":  [
+                                          24
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-37",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "37",
+                        "pdf_item":  "定款の変更",
+                        "normalized_key":  "定款の変更",
+                        "pdf_pages":  [
+                                          24,
+                                          25
+                                      ],
+                        "base_category":  "上場会社・決定事実",
+                        "base_items":  [
+                                           "定款の変更"
+                                       ],
+                        "base_rows":  [
+                                          20
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-38",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "38",
+                        "pdf_item":  "全部取得条項付種類株式の全部の取得",
+                        "normalized_key":  "全部取得条項付種類株式の全部の取得",
+                        "pdf_pages":  [
+                                          25
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-39",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "39",
+                        "pdf_item":  "特別支配株主による株式等売渡請求に係る承認又は不承認",
+                        "normalized_key":  "特別支配株主による株式等売渡請求に係る承認又は不承認",
+                        "pdf_pages":  [
+                                          25
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-DEC-40",
+                        "pdf_category":  "上場会社・決定事実",
+                        "pdf_item_number":  "40",
+                        "pdf_item":  "その他上場会社の運営、業務、若しくは財産又は当該上場株券等に関する重要な事項",
+                        "normalized_key":  "その他上場会社の運営業務若しくは財産又は当該上場株券等に関する重要な事項",
+                        "pdf_pages":  [
+                                          25
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-01",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "1",
+                        "pdf_item":  "災害に起因する損害又は業務遂行の過程で生じた損害",
+                        "normalized_key":  "災害に起因する損害又は業務遂行の過程で生じた損害",
+                        "pdf_pages":  [
+                                          26,
+                                          27
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "災害に起因する損害又は業務遂行の過程で生じた損害"
+                                       ],
+                        "base_rows":  [
+                                          21
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-02",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "2",
+                        "pdf_item":  "主要株主又は主要株主である筆頭株主の異動",
+                        "normalized_key":  "主要株主又は主要株主である筆頭株主の異動",
+                        "pdf_pages":  [
+                                          27
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-03",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "3",
+                        "pdf_item":  "上場廃止の原因となる事実",
+                        "normalized_key":  "上場廃止の原因となる事実",
+                        "pdf_pages":  [
+                                          27
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-04",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "4",
+                        "pdf_item":  "訴訟の提起又は判決等",
+                        "normalized_key":  "訴訟の提起又は判決等",
+                        "pdf_pages":  [
+                                          27,
+                                          28,
+                                          29
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "訴訟の提起又は判決等\n 【訴えが提起された場合】",
+                                           "訴訟の提起又は判決等\n 【判決があった場合、訴訟の全部又は一部が完結した場合】"
+                                       ],
+                        "base_rows":  [
+                                          22,
+                                          23
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-05",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "5",
+                        "pdf_item":  "仮処分命令の申立て又は決定等",
+                        "normalized_key":  "仮処分命令の申立て又は決定等",
+                        "pdf_pages":  [
+                                          29,
+                                          30
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "仮処分命令の申立て又は決定等\n 【申立てがなされた場合】",
+                                           "仮処分命令の申立て又は決定等\n 【裁判があった場合、申立てに係る手続の全部又は一部が完結した場合】"
+                                       ],
+                        "base_rows":  [
+                                          24,
+                                          25
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-06",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "6",
+                        "pdf_item":  "免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発",
+                        "normalized_key":  "免許の取消し事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発",
+                        "pdf_pages":  [
+                                          30,
+                                          31
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発\n 【法令に基づく処分を受けた場合】",
+                                           "免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発\n 【法令違反に係る告発がなされた場合】"
+                                       ],
+                        "base_rows":  [
+                                          26,
+                                          27
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-07",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "7",
+                        "pdf_item":  "親会社の異動、支配株主（親会社を除く。）の異動又はその他の関係会社の異動",
+                        "normalized_key":  "親会社の異動支配株主親会社を除くの異動又はその他の関係会社の異動",
+                        "pdf_pages":  [
+                                          31
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-08",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "8",
+                        "pdf_item":  "破産手続開始、再生手続開始、更生手続開始又は企業担保権の実行の申立て",
+                        "normalized_key":  "破産手続開始再生手続開始更生手続開始又は企業担保権の実行の申立て",
+                        "pdf_pages":  [
+                                          31,
+                                          32
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-09",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "9",
+                        "pdf_item":  "手形等の不渡り又は手形交換所による取引停止処分",
+                        "normalized_key":  "手形等の不渡り又は手形交換所による取引停止処分",
+                        "pdf_pages":  [
+                                          32
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-10",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "10",
+                        "pdf_item":  "親会社等に係る破産手続開始、再生手続開始、更生手続開始又は企業担保権の実行の申立て",
+                        "normalized_key":  "親会社等に係る破産手続開始再生手続開始更生手続開始又は企業担保権の実行の申立て",
+                        "pdf_pages":  [
+                                          32
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-11",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "11",
+                        "pdf_item":  "債権の取立不能又は取立遅延",
+                        "normalized_key":  "債権の取立不能又は取立遅延",
+                        "pdf_pages":  [
+                                          32,
+                                          33
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "債権の取立不能又は取立遅延"
+                                       ],
+                        "base_rows":  [
+                                          28
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-12",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "12",
+                        "pdf_item":  "取引先との取引停止",
+                        "normalized_key":  "取引先との取引停止",
+                        "pdf_pages":  [
+                                          33
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "取引先との取引停止"
+                                       ],
+                        "base_rows":  [
+                                          29
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-13",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "13",
+                        "pdf_item":  "債務免除等の金融支援",
+                        "normalized_key":  "債務免除等の金融支援",
+                        "pdf_pages":  [
+                                          33,
+                                          34
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "債務免除等の金融支援"
+                                       ],
+                        "base_rows":  [
+                                          30
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-14",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "14",
+                        "pdf_item":  "資源の発見",
+                        "normalized_key":  "資源の発見",
+                        "pdf_pages":  [
+                                          34
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "資源の発見"
+                                       ],
+                        "base_rows":  [
+                                          31
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-15",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "15",
+                        "pdf_item":  "特別支配株主による株式等売渡請求等",
+                        "normalized_key":  "特別支配株主による株式等売渡請求等",
+                        "pdf_pages":  [
+                                          34
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-16",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "16",
+                        "pdf_item":  "株式又は新株予約権の発行差止請求",
+                        "normalized_key":  "株式又は新株予約権の発行差止請求",
+                        "pdf_pages":  [
+                                          35
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-17",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "17",
+                        "pdf_item":  "株主総会の招集請求",
+                        "normalized_key":  "株主総会の招集請求",
+                        "pdf_pages":  [
+                                          35
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-18",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "18",
+                        "pdf_item":  "保有有価証券の含み損",
+                        "normalized_key":  "保有有価証券の含み損",
+                        "pdf_pages":  [
+                                          35
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "保有有価証券の含み損"
+                                       ],
+                        "base_rows":  [
+                                          32
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-19",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "19",
+                        "pdf_item":  "社債に係る期限の利益の喪失",
+                        "normalized_key":  "社債に係る期限の利益の喪失",
+                        "pdf_pages":  [
+                                          35,
+                                          36
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "社債に係る期限の利益の喪失"
+                                       ],
+                        "base_rows":  [
+                                          33
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-20",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "20",
+                        "pdf_item":  "財務上の特約が付された金銭消費貸借契約に係る財務上の特約に定める事由の発生",
+                        "normalized_key":  "財務上の特約が付された金銭消費貸借契約に係る財務上の特約に定める事由の発生",
+                        "pdf_pages":  [
+                                          36
+                                      ],
+                        "base_category":  "上場会社・発生事実",
+                        "base_items":  [
+                                           "財務上の特約が付された金銭消費貸借契約に係る財務上の特約に定める事由の発生"
+                                       ],
+                        "base_rows":  [
+                                          34
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-21",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "21",
+                        "pdf_item":  "上場債券等に係る繰上償還又は社債権者集会の招集その他権利に係る重要な事項",
+                        "normalized_key":  "上場債券等に係る繰上償還又は社債権者集会の招集その他権利に係る重要な事項",
+                        "pdf_pages":  [
+                                          36
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-22",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "22",
+                        "pdf_item":  "公認会計士等の異動",
+                        "normalized_key":  "公認会計士等の異動",
+                        "pdf_pages":  [
+                                          36,
+                                          37
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-23",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "23",
+                        "pdf_item":  "有価証券報告書・半期報告書の提出遅延",
+                        "normalized_key":  "有価証券報告書半期報告書の提出遅延",
+                        "pdf_pages":  [
+                                          37,
+                                          38
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-24",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "24",
+                        "pdf_item":  "有価証券報告書・半期報告書の提出期限延長申請に係る承認等",
+                        "normalized_key":  "有価証券報告書半期報告書の提出期限延長申請に係る承認等",
+                        "pdf_pages":  [
+                                          38
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-25",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "25",
+                        "pdf_item":  "財務諸表等の監査報告書における不適正意見、意見不表明、継続企業の前提に関する事項を除外事項とした限定付適正意見",
+                        "normalized_key":  "財務諸表等の監査報告書における不適正意見意見不表明継続企業の前提に関する事項を除外事項とした限定付適正意見",
+                        "pdf_pages":  [
+                                          38
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-26",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "26",
+                        "pdf_item":  "内部統制監査報告書における不適正意見、意見不表明",
+                        "normalized_key":  "内部統制監査報告書における不適正意見意見不表明",
+                        "pdf_pages":  [
+                                          38
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-27",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "27",
+                        "pdf_item":  "株式事務代行委託契約の解除通知の受領等",
+                        "normalized_key":  "株式事務代行委託契約の解除通知の受領等",
+                        "pdf_pages":  [
+                                          38
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-OCC-28",
+                        "pdf_category":  "上場会社・発生事実",
+                        "pdf_item_number":  "28",
+                        "pdf_item":  "その他上場会社の運営、業務、若しくは財産又は当該上場株券等に関する重要 な事実",
+                        "normalized_key":  "その他上場会社の運営業務若しくは財産又は当該上場株券等に関する重要な事実",
+                        "pdf_pages":  [
+                                          38,
+                                          39
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "LC-FIN-01",
+                        "pdf_category":  "上場会社・決算情報",
+                        "pdf_item_number":  "1",
+                        "pdf_item":  "業績予想の修正、予想値と決算値との差異等",
+                        "normalized_key":  "業績予想の修正予想値と決算値との差異等",
+                        "pdf_pages":  [
+                                          40,
+                                          41,
+                                          42
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  "基準ブックの既存4区分には含まれないため、baseなし・比較一覧専用。"
+                    },
+                    {
+                        "mapping_id":  "LC-FIN-02",
+                        "pdf_category":  "上場会社・決算情報",
+                        "pdf_item_number":  "2",
+                        "pdf_item":  "配当予想、配当予想の修正",
+                        "normalized_key":  "配当予想配当予想の修正",
+                        "pdf_pages":  [
+                                          41,
+                                          42
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  "基準ブックの既存4区分には含まれないため、baseなし・比較一覧専用。"
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-01",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "1",
+                        "pdf_item":  "子会社等の合併等の組織再編行為",
+                        "normalized_key":  "子会社等の合併等の組織再編行為",
+                        "pdf_pages":  [
+                                          43,
+                                          44,
+                                          45,
+                                          46
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等の合併等の組織再編行為"
+                                       ],
+                        "base_rows":  [
+                                          35
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-02",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "2",
+                        "pdf_item":  "子会社等による公開買付け又は自己株式の公開買付け",
+                        "normalized_key":  "子会社等による公開買付け又は自己株式の公開買付け",
+                        "pdf_pages":  [
+                                          46
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-03",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "3",
+                        "pdf_item":  "子会社等の事業の全部又は一部の譲渡又は譲受け",
+                        "normalized_key":  "子会社等の事業の全部又は一部の譲渡又は譲受け",
+                        "pdf_pages":  [
+                                          46,
+                                          47
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等の事業の全部又は一部の譲渡又は譲受け"
+                                       ],
+                        "base_rows":  [
+                                          36
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-04",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "4",
+                        "pdf_item":  "子会社等の解散（合併による解散を除く。）",
+                        "normalized_key":  "子会社等の解散合併による解散を除く",
+                        "pdf_pages":  [
+                                          47
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等の解散(合併による解散を除く。)"
+                                       ],
+                        "base_rows":  [
+                                          37
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-05",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "5",
+                        "pdf_item":  "子会社等における新製品又は新技術の企業化",
+                        "normalized_key":  "子会社等における新製品又は新技術の企業化",
+                        "pdf_pages":  [
+                                          47,
+                                          48
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等における新製品又は新技術の企業化"
+                                       ],
+                        "base_rows":  [
+                                          38
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-06",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "6",
+                        "pdf_item":  "子会社等の業務上の提携又は業務上の提携の解消",
+                        "normalized_key":  "子会社等の業務上の提携又は業務上の提携の解消",
+                        "pdf_pages":  [
+                                          48,
+                                          49,
+                                          50
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等における業務上の提携又は業務上の提携の解消",
+                                           "子会社等における業務上の提携又は業務上の提携の解消\n 【資本提携を伴う場合の追加確認項目】",
+                                           "子会社等における業務上の提携又は業務上の提携の解消\n 【合弁会社の設立を伴う場合の追加確認項目】"
+                                       ],
+                        "base_rows":  [
+                                          39,
+                                          40,
+                                          41
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（3行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-07",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "7",
+                        "pdf_item":  "子会社等における孫会社の異動を伴う株式又は持分の譲渡又は取得その他の孫会社の異動を伴う事項",
+                        "normalized_key":  "子会社等における孫会社の異動を伴う株式又は持分の譲渡又は取得その他の孫会社の異動を伴う事項",
+                        "pdf_pages":  [
+                                          50,
+                                          51,
+                                          52
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等における孫会社の異動を伴う株式又は持分の譲渡又は取得その他の孫会社の異動を伴う事項",
+                                           "子会社等における孫会社の異動を伴う株式又は持分の譲渡又は取得その他の孫会社の異動を伴う事項\n 【孫会社取得の場合の追加確認項目】"
+                                       ],
+                        "base_rows":  [
+                                          42,
+                                          43
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-08",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "8",
+                        "pdf_item":  "子会社等における固定資産の譲渡又は取得、リースによる固定資産の賃貸借",
+                        "normalized_key":  "子会社等における固定資産の譲渡又は取得リースによる固定資産の賃貸借",
+                        "pdf_pages":  [
+                                          52,
+                                          53
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等における固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【固定資産の譲渡の場合】",
+                                           "子会社等における固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【固定資産の取得の場合】",
+                                           "子会社等における固定資産の譲渡又は取得、リースによる固定資産の賃貸借\n 【リースによる固定資産の賃貸借の場合】"
+                                       ],
+                        "base_rows":  [
+                                          44,
+                                          45,
+                                          46
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（3行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-09",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "9",
+                        "pdf_item":  "子会社等の事業の全部又は一部の休止又は廃止",
+                        "normalized_key":  "子会社等の事業の全部又は一部の休止又は廃止",
+                        "pdf_pages":  [
+                                          53,
+                                          54
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等の事業の全部又は一部の休止又は廃止"
+                                       ],
+                        "base_rows":  [
+                                          47
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-10",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "10",
+                        "pdf_item":  "子会社等の破産手続開始、再生手続開始又は更生手続開始の申立て",
+                        "normalized_key":  "子会社等の破産手続開始再生手続開始又は更生手続開始の申立て",
+                        "pdf_pages":  [
+                                          54
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-11",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "11",
+                        "pdf_item":  "子会社等における新たな事業の開始",
+                        "normalized_key":  "子会社等における新たな事業の開始",
+                        "pdf_pages":  [
+                                          54,
+                                          55
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等における新たな事業の開始"
+                                       ],
+                        "base_rows":  [
+                                          48
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-12",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "12",
+                        "pdf_item":  "子会社等における財務上の特約が付された金銭消費貸借契約の締結、財務上の特約が付された社債の発行又は財務上の特約の内容の変更",
+                        "normalized_key":  "子会社等における財務上の特約が付された金銭消費貸借契約の締結財務上の特約が付された社債の発行又は財務上の特約の内容の変更",
+                        "pdf_pages":  [
+                                          55,
+                                          56,
+                                          57
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等における財務上の特約が付された金銭消費貸借契約の締結、財務上の特約が付された社債の発行又は財務上の特約の内容の変更等"
+                                       ],
+                        "base_rows":  [
+                                          49
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-13",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "13",
+                        "pdf_item":  "子会社等の商号又は名称の変更",
+                        "normalized_key":  "子会社等の商号又は名称の変更",
+                        "pdf_pages":  [
+                                          56,
+                                          57
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等の商号又は名称の変更"
+                                       ],
+                        "base_rows":  [
+                                          50
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-14",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "14",
+                        "pdf_item":  "子会社等における債務超過又は預金等の払戻の停止のおそれがある旨の内閣総理大臣への申出（預金保険法第74条第５項の規定による申出）",
+                        "normalized_key":  "子会社等における債務超過又は預金等の払戻の停止のおそれがある旨の内閣総理大臣への申出預金保険法第74条第5項の規定による申出",
+                        "pdf_pages":  [
+                                          56,
+                                          57
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-15",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "15",
+                        "pdf_item":  "子会社等における特定調停法に基づく特定調停手続による調停の申立て",
+                        "normalized_key":  "子会社等における特定調停法に基づく特定調停手続による調停の申立て",
+                        "pdf_pages":  [
+                                          56,
+                                          57
+                                      ],
+                        "base_category":  "子会社等・決定事実",
+                        "base_items":  [
+                                           "子会社等における特定調停法に基づく特定調停手続による調停の申立て"
+                                       ],
+                        "base_rows":  [
+                                          51
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-DEC-16",
+                        "pdf_category":  "子会社等・決定事実",
+                        "pdf_item_number":  "16",
+                        "pdf_item":  "その他子会社等の運営、業務又は財産に関する重要な事項",
+                        "normalized_key":  "その他子会社等の運営業務又は財産に関する重要な事項",
+                        "pdf_pages":  [
+                                          56,
+                                          57
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-01",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "1",
+                        "pdf_item":  "子会社等における災害に起因する損害又は業務遂行の過程で生じた損害",
+                        "normalized_key":  "子会社等における災害に起因する損害又は業務遂行の過程で生じた損害",
+                        "pdf_pages":  [
+                                          58
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における災害に起因する損害又は業務遂行の過程で生じた損害"
+                                       ],
+                        "base_rows":  [
+                                          52
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-02",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "2",
+                        "pdf_item":  "子会社等における訴訟の提起又は判決等",
+                        "normalized_key":  "子会社等における訴訟の提起又は判決等",
+                        "pdf_pages":  [
+                                          58,
+                                          59
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における訴訟の提起又は判決等\n 【訴えが提起された場合】",
+                                           "子会社等における訴訟の提起又は判決等\n 【判決があった場合、訴訟の全部又は一部が完結した場合】"
+                                       ],
+                        "base_rows":  [
+                                          53,
+                                          54
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-03",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "3",
+                        "pdf_item":  "子会社等における仮処分命令の申立て又は決定等",
+                        "normalized_key":  "子会社等における仮処分命令の申立て又は決定等",
+                        "pdf_pages":  [
+                                          60,
+                                          61
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における仮処分命令の申立て又は決定等\n 【申立てがなされた場合】",
+                                           "子会社等における仮処分命令の申立て又は決定等\n 【裁判があった場合、申立てに係る手続の全部又は一部が完結した場合】"
+                                       ],
+                        "base_rows":  [
+                                          55,
+                                          56
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-04",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "4",
+                        "pdf_item":  "子会社等における免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発",
+                        "normalized_key":  "子会社等における免許の取消し事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発",
+                        "pdf_pages":  [
+                                          61
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発\n 【法令に基づく処分を受けた場合】",
+                                           "子会社等における免許の取消し、事業の停止その他これらに準ずる行政庁による法令に基づく処分又は行政庁による法令違反に係る告発\n 【法令違反に係る告発がなされた場合】"
+                                       ],
+                        "base_rows":  [
+                                          57,
+                                          58
+                                      ],
+                        "match_status":  "manual",
+                        "match_confidence":  0.95,
+                        "manual_review_flag":  true,
+                        "manual_review_reason":  "基準ブックの複数行（2行）が1つのPDF親項目に対応する一対多。サブケースを手動確認。"
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-05",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "5",
+                        "pdf_item":  "子会社等における破産手続開始、再生手続開始、更生手続開始又は企業担保権の実行の申立て",
+                        "normalized_key":  "子会社等における破産手続開始再生手続開始更生手続開始又は企業担保権の実行の申立て",
+                        "pdf_pages":  [
+                                          61
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-06",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "6",
+                        "pdf_item":  "子会社等における手形等の不渡り又は 手形交換所による取引停止処分",
+                        "normalized_key":  "子会社等における手形等の不渡り又は手形交換所による取引停止処分",
+                        "pdf_pages":  [
+                                          61,
+                                          62
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-07",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "7",
+                        "pdf_item":  "子会社等における孫会社に係る破産手続開始、再生手続開始、更生手続開始又は企業担保権の実行の申立て",
+                        "normalized_key":  "子会社等における孫会社に係る破産手続開始再生手続開始更生手続開始又は企業担保権の実行の申立て",
+                        "pdf_pages":  [
+                                          62
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-08",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "8",
+                        "pdf_item":  "子会社等における債権の取立不能又は取立遅延",
+                        "normalized_key":  "子会社等における債権の取立不能又は取立遅延",
+                        "pdf_pages":  [
+                                          62
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における債権の取立不能又は取立遅延"
+                                       ],
+                        "base_rows":  [
+                                          59
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-09",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "9",
+                        "pdf_item":  "子会社等における取引先との取引停止",
+                        "normalized_key":  "子会社等における取引先との取引停止",
+                        "pdf_pages":  [
+                                          63
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における取引先との取引停止"
+                                       ],
+                        "base_rows":  [
+                                          60
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-10",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "10",
+                        "pdf_item":  "子会社等における債務免除等の金融支援",
+                        "normalized_key":  "子会社等における債務免除等の金融支援",
+                        "pdf_pages":  [
+                                          63
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における債務免除等の金融支援"
+                                       ],
+                        "base_rows":  [
+                                          61
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-11",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "11",
+                        "pdf_item":  "子会社等における資源の発見",
+                        "normalized_key":  "子会社等における資源の発見",
+                        "pdf_pages":  [
+                                          64
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における資源の発見"
+                                       ],
+                        "base_rows":  [
+                                          62
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-12",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "12",
+                        "pdf_item":  "子会社等における社債に係る期限の利益の喪失",
+                        "normalized_key":  "子会社等における社債に係る期限の利益の喪失",
+                        "pdf_pages":  [
+                                          64
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における社債に係る期限の利益の喪失"
+                                       ],
+                        "base_rows":  [
+                                          63
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-13",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "13",
+                        "pdf_item":  "子会社等における財務上の特約が付された金銭消費貸借契約に係る財務上の特約に定める事由の発生",
+                        "normalized_key":  "子会社等における財務上の特約が付された金銭消費貸借契約に係る財務上の特約に定める事由の発生",
+                        "pdf_pages":  [
+                                          64
+                                      ],
+                        "base_category":  "子会社等・発生事実",
+                        "base_items":  [
+                                           "子会社等における財務上の特約が付された金銭消費貸借契約に係る財務上の特約"
+                                       ],
+                        "base_rows":  [
+                                          64
+                                      ],
+                        "match_status":  "normalized",
+                        "match_confidence":  0.99,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-OCC-14",
+                        "pdf_category":  "子会社等・発生事実",
+                        "pdf_item_number":  "14",
+                        "pdf_item":  "その他子会社等の運営、業務又は財産に関する重要な事実",
+                        "normalized_key":  "その他子会社等の運営業務又は財産に関する重要な事実",
+                        "pdf_pages":  [
+                                          64
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  null
+                    },
+                    {
+                        "mapping_id":  "SUB-FIN-01",
+                        "pdf_category":  "子会社等・決算情報",
+                        "pdf_item_number":  "",
+                        "pdf_item":  "子会社の業績予想の修正、予想値と決算値との差異等",
+                        "normalized_key":  "子会社の業績予想の修正予想値と決算値との差異等",
+                        "pdf_pages":  [
+                                          65,
+                                          66
+                                      ],
+                        "base_category":  null,
+                        "base_items":  [
+
+                                       ],
+                        "base_rows":  [
+
+                                      ],
+                        "match_status":  "none",
+                        "match_confidence":  0,
+                        "manual_review_flag":  false,
+                        "manual_review_reason":  "基準ブックの既存4区分には含まれないため、baseなし・比較一覧専用。"
+                    }
+                ]
+}

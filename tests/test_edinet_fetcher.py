@@ -11,6 +11,7 @@ class DummyResponse:
         self.status_code = status_code
         self._payload = payload or {}
         self.content = content
+        self.text = ""
 
     def json(self):
         return self._payload
@@ -163,6 +164,31 @@ class EdinetFetcherTests(unittest.TestCase):
         self.assertEqual(result["period_end"], "2026-03-31")
         self.assertEqual(result["period_label"], "2026年3月期")
 
+    def test_documents_api_uses_subscription_key_parameter(self):
+        calls = []
+
+        def fake_get(url, params=None, headers=None, timeout=None):
+            calls.append({"url": url, "params": params, "headers": headers, "timeout": timeout})
+            return DummyResponse(payload={"results": []})
+
+        with patch("edinet_fetcher.get_api_key", return_value="dummy-key"), patch(
+            "edinet_fetcher.requests.get", side_effect=fake_get
+        ):
+            edinet_fetcher.get_latest_yuho_doc_id("7203", max_days=1)
+
+        self.assertEqual(calls[0]["params"]["Subscription-Key"], "dummy-key")
+        self.assertEqual(calls[0]["headers"]["Ocp-Apim-Subscription-Key"], "dummy-key")
+
+    def test_documents_api_status_error_is_not_reported_as_not_found(self):
+        with patch("edinet_fetcher.requests.get", return_value=DummyResponse(status_code=401)):
+            with self.assertRaisesRegex(RuntimeError, "EDINET APIエラー"):
+                edinet_fetcher.get_doc_id_for_date(
+                    "2026-07-08",
+                    "7203",
+                    "https://example.test",
+                    {"Ocp-Apim-Subscription-Key": "dummy-key"},
+                )
+
     def test_extract_financial_data_from_xbrl_includes_doc_info(self):
         html = """
         <html><body>
@@ -188,6 +214,27 @@ class EdinetFetcherTests(unittest.TestCase):
         self.assertEqual(result["doc_info"]["period_label"], "2026年3月期")
         self.assertIn("有価証券報告書", result["doc_info_label"])
         self.assertIn("2026年3月期", result["doc_info_label"])
+
+    def test_xbrl_download_uses_subscription_key_parameter(self):
+        html = """
+        <html><body>
+          <ix:nonfraction name="jppfs_cor:NetAssets"
+              contextRef="CurrentYearInstantConsolidatedMember" unitRef="JPY">200000000</ix:nonfraction>
+        </body></html>
+        """
+        calls = []
+
+        def fake_get(url, params=None, headers=None, timeout=None):
+            calls.append({"url": url, "params": params, "headers": headers, "timeout": timeout})
+            return DummyResponse(status_code=200, content=make_xbrl_zip(html))
+
+        with patch("edinet_fetcher.get_api_key", return_value="dummy-key"), patch(
+            "edinet_fetcher.requests.get", side_effect=fake_get
+        ):
+            edinet_fetcher.extract_financial_data_from_xbrl("S100DOC")
+
+        self.assertEqual(calls[0]["params"]["Subscription-Key"], "dummy-key")
+        self.assertEqual(calls[0]["headers"]["Ocp-Apim-Subscription-Key"], "dummy-key")
 
     def test_financial_or_insurance_ordinary_income_can_be_used_as_sales(self):
         html = """

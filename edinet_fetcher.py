@@ -262,28 +262,44 @@ def _doc_metadata_from_result(doc, target_date_str):
         "period_label": _period_label_from_end_date(period_end),
     }
 
+def _subscription_key_from_headers(headers):
+    return (headers or {}).get("Ocp-Apim-Subscription-Key")
+
+def _response_error_message(resp, action):
+    detail = getattr(resp, "text", "") or ""
+    detail = detail.strip()
+    if len(detail) > 200:
+        detail = detail[:200] + "..."
+    suffix = f": {detail}" if detail else ""
+    return f"EDINET APIエラー（{action} HTTP {resp.status_code}）{suffix}"
+
 def get_doc_id_for_date(target_date_str, company_name, base_url, headers):
     params = {"date": target_date_str, "type": 2}
+    api_key = _subscription_key_from_headers(headers)
+    if api_key:
+        params["Subscription-Key"] = api_key
     try:
         resp = requests.get(base_url, params=params, headers=headers, timeout=20)
     except requests.RequestException:
         return None
-    if resp.status_code == 200:
-        data = resp.json()
-        if "results" in data:
-            for doc in data["results"]:
-                doc_desc = doc.get("docDescription") or ""
-                filer_name = doc.get("filerName") or ""
-                sec_code = str(doc.get("secCode") or "")
-                
-                is_match = False
-                if company_name in filer_name:
-                    is_match = True
-                elif _sec_code_matches(company_name, sec_code):
-                    is_match = True
+    if resp.status_code != 200:
+        raise RuntimeError(_response_error_message(resp, "書類一覧取得"))
 
-                if doc_desc and filer_name and "有価証券報告書" in doc_desc and is_match:
-                    return _doc_metadata_from_result(doc, target_date_str)
+    data = resp.json()
+    if "results" in data:
+        for doc in data["results"]:
+            doc_desc = doc.get("docDescription") or ""
+            filer_name = doc.get("filerName") or ""
+            sec_code = str(doc.get("secCode") or "")
+            
+            is_match = False
+            if company_name in filer_name:
+                is_match = True
+            elif _sec_code_matches(company_name, sec_code):
+                is_match = True
+
+            if doc_desc and filer_name and "有価証券報告書" in doc_desc and is_match:
+                return _doc_metadata_from_result(doc, target_date_str)
     return None
 
 def get_latest_yuho_doc_id(company_name, max_days=365):
@@ -334,7 +350,7 @@ def extract_financial_data_from_xbrl(doc_id, doc_info=None):
         raise ValueError("EDINET_API_KEY is not set in secrets.toml or .env (ファイルが保存されていない可能性があります)")
         
     url = f"https://api.edinet-fsa.go.jp/api/v2/documents/{doc_id}"
-    params = {"type": 1} # 1 = zip containing xbrl
+    params = {"type": 1, "Subscription-Key": api_key} # 1 = zip containing xbrl
     headers = {"Ocp-Apim-Subscription-Key": api_key}
     
     try:
@@ -342,7 +358,7 @@ def extract_financial_data_from_xbrl(doc_id, doc_info=None):
     except requests.RequestException as exc:
         raise Exception(f"EDINETから文書を取得できませんでした: {exc}") from exc
     if resp.status_code != 200:
-        raise Exception(f"Failed to download document {doc_id} from EDINET API.")
+        raise Exception(_response_error_message(resp, f"文書取得 docID={doc_id}"))
         
     merged_info = _merge_doc_info(doc_info, {"doc_id": doc_id})
     return _extract_financial_data_from_zip_bytes(resp.content, merged_info)

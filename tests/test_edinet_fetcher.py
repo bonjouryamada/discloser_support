@@ -341,6 +341,41 @@ class EdinetFetcherTests(unittest.TestCase):
         nonzero = edinet_fetcher._format_financial_data({"net_assets": (1, 1)})
         self.assertNotIn("debug_candidates", nonzero)
 
+    def test_partial_zero_result_includes_debug_candidates(self):
+        html = """
+        <html><body>
+          <ix:nonfraction name="jppfs_cor:NetAssets" contextRef="CurrentYearInstant" unitRef="JPY">0</ix:nonfraction>
+          <ix:nonfraction name="jppfs_cor:NetSales" contextRef="CurrentYearDuration" unitRef="JPY">100000000</ix:nonfraction>
+          <ix:nonfraction name="jppfs_cor:OrdinaryProfit" contextRef="CurrentYearDuration" unitRef="JPY">20000000</ix:nonfraction>
+          <ix:nonfraction name="jppfs_cor:ProfitLossAttributableToOwnersOfParent" contextRef="CurrentYearDuration" unitRef="JPY">10000000</ix:nonfraction>
+          <ix:nonfraction name="jppfs_cor:CapitalStock" contextRef="CurrentYearInstant" unitRef="JPY">5000000</ix:nonfraction>
+        </body></html>
+        """
+
+        result = edinet_fetcher._extract_financial_data_from_zip_bytes(make_xbrl_zip(html))
+
+        self.assertEqual(result["missing_keys"], [])
+        self.assertIn("debug_candidates", result)
+
+    def test_all_nonzero_result_does_not_include_debug_candidates(self):
+        parsed_data = {
+            key: (index + 1, (True, 0, 0, index + 1))
+            for index, key in enumerate(edinet_fetcher.FINANCIAL_KEYS)
+        }
+        candidates = [{
+            "tag_name": "custom:AssetMetric",
+            "context_ref": "CurrentYearInstant",
+            "raw_value": "1000000",
+            "normalized_value": 1,
+            "candidate_key": "unmatched",
+        }]
+
+        result = edinet_fetcher._format_financial_data(
+            parsed_data, debug_candidates=candidates
+        )
+
+        self.assertNotIn("debug_candidates", result)
+
     def test_unmatched_nonzero_candidates_are_ranked_and_returned_without_parsed_data(self):
         zero_tags = "".join(
             f'<ix:nonfraction name="custom:UnknownMetric{index}" '

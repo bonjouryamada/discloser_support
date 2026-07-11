@@ -219,14 +219,17 @@ with page_assist:
         current = st.session_state.financial_data
         period_label = (st.session_state.edinet_doc_info or {}).get("period_label") or "手入力/未取得"
         st.caption(f"表示中の決算数値: {period_label}（百万円）")
+        has_zero_value = any(
+            current.get(key, 0.0) == 0.0 for _, key in FINANCIAL_FIELDS
+        )
+        if has_zero_value and st.session_state.edinet_debug_candidates:
+            with st.expander("EDINET XBRL candidate diagnostics", expanded=False):
+                st.dataframe(
+                    st.session_state.edinet_debug_candidates,
+                    width="stretch",
+                    hide_index=True,
+                )
         if all(current.get(key, 0.0) == 0.0 for _, key in FINANCIAL_FIELDS):
-            if st.session_state.edinet_debug_candidates:
-                with st.expander("EDINET XBRL candidate diagnostics", expanded=False):
-                    st.dataframe(
-                        st.session_state.edinet_debug_candidates,
-                        width="stretch",
-                        hide_index=True,
-                    )
             st.warning("財務数値がすべて0です。EDINET取得結果または手入力値を確認してください。")
         if st.session_state.edinet_missing_keys:
             st.warning("一部の財務項目をEDINETから取得できませんでした。必要に応じて手入力してください。")

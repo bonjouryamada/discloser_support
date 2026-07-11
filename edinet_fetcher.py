@@ -318,11 +318,15 @@ def _format_financial_data(parsed_data, doc_info=None, debug_candidates=None):
     all_values_zero = all(
         financial_data.get(key, 0) == 0 for key in FINANCIAL_KEYS
     )
+    has_zero_or_missing = bool(missing_keys) or any(
+        financial_data.get(key, 0) == 0 for key in FINANCIAL_KEYS
+    )
     if all_values_zero and ranked_debug_candidates:
         warnings.append(
             "EDINET XBRLで候補タグは見つかりましたが、値がすべて0です。"
             "財務諸表タグの形式が未対応の可能性があります。"
         )
+    if has_zero_or_missing and ranked_debug_candidates:
         financial_data["debug_candidates"] = ranked_debug_candidates
     financial_data["warnings"] = warnings
     return financial_data

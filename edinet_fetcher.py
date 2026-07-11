@@ -181,17 +181,28 @@ def _value_in_millions(tag):
             return val / 1_000_000
     return val / 1_000_000
 
-def _parse_financial_data_from_soup(soup):
+DEBUG_FINANCIAL_TERMS = (
+    "equity", "asset", "revenue", "income", "profit", "capital",
+    "insurance", "premium",
+)
+
+def _rank_debug_candidates(candidates):
+    def rank(candidate):
+        tag_name = candidate["tag_name"].lower()
+        return (
+            candidate["normalized_value"] != 0,
+            any(term in tag_name for term in DEBUG_FINANCIAL_TERMS),
+        )
+
+    return sorted(candidates, key=rank, reverse=True)[:20]
+
+def _parse_financial_data_from_soup(soup, debug_candidates=None):
     parsed_data = {}
 
     for tag in soup.find_all(lambda item: _tag_name_attr(item) and _get_attr(item, "contextRef")):
         name_attr = _tag_name_attr(tag)
-        match = _financial_match_score(name_attr)
-        if not match:
-            continue
-        key, tag_priority = match
-
-        context_score = _context_score(_get_attr(tag, "contextRef"))
+        context_ref = _get_attr(tag, "contextRef")
+        context_score = _context_score(context_ref)
         if context_score is None:
             continue
 
@@ -201,6 +212,20 @@ def _parse_financial_data_from_soup(soup):
             continue
         if val_in_millions is None:
             continue
+
+        match = _financial_match_score(name_attr)
+        if debug_candidates is not None and _get_attr(tag, "unitRef"):
+            debug_candidates.append({
+                "tag_name": name_attr,
+                "context_ref": context_ref,
+                "raw_value": tag.get_text(strip=True),
+                "normalized_value": val_in_millions,
+                "candidate_key": match[0] if match else "unmatched",
+            })
+
+        if not match:
+            continue
+        key, tag_priority = match
 
         nonzero_bonus = 500 if val_in_millions != 0 else 0
         magnitude_bonus = min(abs(val_in_millions), 10_000_000) / 10_000_000
@@ -276,7 +301,7 @@ def _format_doc_info(info):
         parts.append(f"docID: {info['doc_id']}")
     return " / ".join(parts)
 
-def _format_financial_data(parsed_data, doc_info=None):
+def _format_financial_data(parsed_data, doc_info=None, debug_candidates=None):
     missing_keys = [key for key in FINANCIAL_KEYS if key not in parsed_data]
     financial_data = {key: parsed_data.get(key, (0, 0))[0] for key in FINANCIAL_KEYS}
     financial_data["missing_keys"] = missing_keys
@@ -286,16 +311,22 @@ def _format_financial_data(parsed_data, doc_info=None):
         "EDINET XBRLで値を取得できなかった項目があります: "
         + "、".join(FINANCIAL_LABELS.get(key, key) for key in missing_keys)
     ] if missing_keys else []
-    if parsed_data and all(financial_data.get(key, 0) == 0 for key in FINANCIAL_KEYS):
+    ranked_debug_candidates = _rank_debug_candidates(debug_candidates or [])
+    all_values_zero = all(
+        financial_data.get(key, 0) == 0 for key in FINANCIAL_KEYS
+    )
+    if all_values_zero and ranked_debug_candidates:
         warnings.append(
             "EDINET XBRLで候補タグは見つかりましたが、値がすべて0です。"
             "財務諸表タグの形式が未対応の可能性があります。"
         )
+        financial_data["debug_candidates"] = ranked_debug_candidates
     financial_data["warnings"] = warnings
     return financial_data
 
 def _extract_financial_data_from_zip_bytes(zip_bytes, doc_info=None):
     parsed_data = {}
+    debug_candidates = []
     merged_doc_info = dict(doc_info or {})
 
     with zipfile.ZipFile(io.BytesIO(zip_bytes)) as z:
@@ -309,12 +340,14 @@ def _extract_financial_data_from_zip_bytes(zip_bytes, doc_info=None):
             html_content = z.read(xbrl_file)
             soup = BeautifulSoup(html_content, "html.parser")
             merged_doc_info = _merge_doc_info(merged_doc_info, _extract_doc_info_from_soup(soup))
-            for key, candidate in _parse_financial_data_from_soup(soup).items():
+            for key, candidate in _parse_financial_data_from_soup(
+                soup, debug_candidates
+            ).items():
                 previous = parsed_data.get(key)
                 if previous is None or candidate[1] > previous[1]:
                     parsed_data[key] = candidate
 
-    return _format_financial_data(parsed_data, merged_doc_info)
+    return _format_financial_data(parsed_data, merged_doc_info, debug_candidates)
 
 def _doc_metadata_from_result(doc, target_date_str):
     period_start = doc.get("periodStart")

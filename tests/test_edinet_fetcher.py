@@ -302,6 +302,59 @@ class EdinetFetcherTests(unittest.TestCase):
         self.assertNotIn("net_assets", result["missing_keys"])
         self.assertTrue(result["warnings"])
 
+    def test_all_zero_result_includes_at_most_twenty_safe_debug_candidates(self):
+        tags = "".join(
+            '<ix:nonfraction name="jppfs_cor:NetAssets" '
+            'contextRef="CurrentYearInstantConsolidatedMember" unitRef="JPY">'
+            '0</ix:nonfraction>'
+            for _ in range(25)
+        )
+
+        result = edinet_fetcher._extract_financial_data_from_zip_bytes(
+            make_xbrl_zip(f"<html><body>{tags}</body></html>")
+        )
+
+        self.assertEqual(len(result["debug_candidates"]), 20)
+        self.assertEqual(
+            set(result["debug_candidates"][0]),
+            {"tag_name", "context_ref", "raw_value", "normalized_value", "candidate_key"},
+        )
+        self.assertEqual(result["debug_candidates"][0]["candidate_key"], "net_assets")
+        self.assertEqual(result["debug_candidates"][0]["normalized_value"], 0)
+
+        nonzero = edinet_fetcher._format_financial_data({"net_assets": (1, 1)})
+        self.assertNotIn("debug_candidates", nonzero)
+
+    def test_unmatched_nonzero_candidates_are_ranked_and_returned_without_parsed_data(self):
+        zero_tags = "".join(
+            f'<ix:nonfraction name="custom:UnknownMetric{index}" '
+            'contextRef="CurrentYearDurationConsolidatedMember" unitRef="JPY">'
+            '0</ix:nonfraction>'
+            for index in range(25)
+        )
+        html = f"""
+        <html><body>
+          {zero_tags}
+          <ix:nonfraction name="custom:AssetMetric"
+              contextRef="CurrentYearDurationConsolidatedMember"
+              unitRef="JPY">123000000</ix:nonfraction>
+        </body></html>
+        """
+
+        result = edinet_fetcher._extract_financial_data_from_zip_bytes(
+            make_xbrl_zip(html)
+        )
+
+        self.assertEqual(result["missing_keys"], list(edinet_fetcher.FINANCIAL_KEYS))
+        self.assertTrue(all(result[key] == 0 for key in edinet_fetcher.FINANCIAL_KEYS))
+        self.assertEqual(len(result["debug_candidates"]), 20)
+        self.assertEqual(
+            result["debug_candidates"][0]["tag_name"],
+            "custom:AssetMetric",
+        )
+        self.assertEqual(result["debug_candidates"][0]["candidate_key"], "unmatched")
+        self.assertEqual(result["debug_candidates"][0]["normalized_value"], 123)
+
 
 if __name__ == "__main__":
     unittest.main()

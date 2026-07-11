@@ -114,6 +114,8 @@ def _financial_key_for_tag(name_attr):
     name = name_attr.lower().split(":")[-1]
     if _is_abstract_tag(name):
         return None
+    if name == "equity":
+        return "net_assets"
     if "ordinaryincomeloss" in name:
         return "recurring_profit"
     for key, patterns in FINANCIAL_TAG_PATTERNS.items():
@@ -125,6 +127,8 @@ def _financial_match_score(name_attr):
     name = name_attr.lower().split(":")[-1]
     if _is_abstract_tag(name):
         return None
+    if name == "equity":
+        return ("net_assets", 550)
     if "ordinaryincomeloss" in name:
         return ("recurring_profit", 300)
     best = None

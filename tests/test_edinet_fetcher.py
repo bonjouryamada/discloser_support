@@ -133,6 +133,39 @@ class EdinetFetcherTests(unittest.TestCase):
 
         self.assertEqual(result["net_assets"], 250)
 
+    def test_ifrs_equity_exact_name_is_extracted_as_net_assets(self):
+        html = """
+        <html><body>
+          <ix:nonfraction name="ifrs-full:Equity"
+              contextRef="CurrentYearInstant" unitRef="JPY">345000000</ix:nonfraction>
+        </body></html>
+        """
+
+        result = edinet_fetcher._extract_financial_data_from_zip_bytes(
+            make_xbrl_zip(html)
+        )
+
+        self.assertEqual(result["net_assets"], 345)
+        self.assertNotIn("net_assets", result["missing_keys"])
+
+    def test_ifrs_equity_instruments_does_not_match_net_assets(self):
+        html = """
+        <html><body>
+          <ix:nonfraction name="ifrs-full:EquityInstruments"
+              contextRef="CurrentYearInstant" unitRef="JPY">345000000</ix:nonfraction>
+        </body></html>
+        """
+
+        result = edinet_fetcher._extract_financial_data_from_zip_bytes(
+            make_xbrl_zip(html)
+        )
+
+        self.assertIsNone(
+            edinet_fetcher._financial_match_score("ifrs-full:EquityInstruments")
+        )
+        self.assertEqual(result["net_assets"], 0)
+        self.assertIn("net_assets", result["missing_keys"])
+
     def test_xbrl_extracts_period_metadata_from_dei_tags(self):
         html = """
         <html><body>

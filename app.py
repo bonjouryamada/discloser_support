@@ -177,8 +177,6 @@ with page_assist:
         st.session_state.edinet_missing_keys = []
     if "edinet_doc_info" not in st.session_state:
         st.session_state.edinet_doc_info = {}
-    if "edinet_debug_candidates" not in st.session_state:
-        st.session_state.edinet_debug_candidates = []
 
     with st.expander("会社財務データ・EDINET取得", expanded=False):
         company_query = st.text_input("会社名または証券コード")
@@ -202,9 +200,6 @@ with page_assist:
                         st.session_state.edinet_doc_info = fetched_data.get("doc_info", result)
                         st.session_state.edinet_warnings = list(fetched_data.get("warnings", []))
                         st.session_state.edinet_missing_keys = list(fetched_data.get("missing_keys", []))
-                        st.session_state.edinet_debug_candidates = list(
-                            fetched_data.get("debug_candidates", [])
-                        )
                         st.success(f"{filer_name} の財務データを取得しました。")
                     except Exception as exc:
                         st.error(f"EDINET取得エラー: {exc}")
@@ -219,16 +214,6 @@ with page_assist:
         current = st.session_state.financial_data
         period_label = (st.session_state.edinet_doc_info or {}).get("period_label") or "手入力/未取得"
         st.caption(f"表示中の決算数値: {period_label}（百万円）")
-        has_zero_value = any(
-            current.get(key, 0.0) == 0.0 for _, key in FINANCIAL_FIELDS
-        )
-        if has_zero_value and st.session_state.edinet_debug_candidates:
-            with st.expander("EDINET XBRL candidate diagnostics", expanded=False):
-                st.dataframe(
-                    st.session_state.edinet_debug_candidates,
-                    width="stretch",
-                    hide_index=True,
-                )
         if all(current.get(key, 0.0) == 0.0 for _, key in FINANCIAL_FIELDS):
             st.warning("財務数値がすべて0です。EDINET取得結果または手入力値を確認してください。")
         if st.session_state.edinet_missing_keys:

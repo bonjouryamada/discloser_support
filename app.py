@@ -194,7 +194,10 @@ with page_assist:
                         doc_id = result["doc_id"]
                         filer_name = result.get("filer_name", "")
                         fetched_data = extract_financial_data_from_xbrl(doc_id, result)
-                        st.session_state.financial_data = financial_values_only(fetched_data)
+                        fetched_values = financial_values_only(fetched_data)
+                        st.session_state.financial_data = fetched_values
+                        for _, key in FINANCIAL_FIELDS:
+                            st.session_state[f"metric_{key}"] = f"{fetched_values[key]:,.0f}"
                         st.session_state.fetched_company_name = filer_name
                         st.session_state.edinet_doc_info = fetched_data.get("doc_info", result)
                         st.session_state.edinet_warnings = list(fetched_data.get("warnings", []))

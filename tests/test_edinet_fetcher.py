@@ -117,6 +117,22 @@ class EdinetFetcherTests(unittest.TestCase):
         self.assertEqual(result["missing_keys"], [])
         self.assertEqual(result["warnings"], [])
 
+    def test_xbrl_prefers_nonzero_value_over_stronger_current_context(self):
+        html = """
+        <html><body>
+          <ix:nonfraction name="jppfs_cor:NetAssets"
+              contextRef="CurrentYearInstantConsolidatedMember" unitRef="JPY">0</ix:nonfraction>
+          <ix:nonfraction name="jppfs_cor:NetAssets"
+              contextRef="CurrentYearInstant" unitRef="JPY">250000000</ix:nonfraction>
+        </body></html>
+        """
+
+        result = edinet_fetcher._extract_financial_data_from_zip_bytes(
+            make_xbrl_zip(html)
+        )
+
+        self.assertEqual(result["net_assets"], 250)
+
     def test_xbrl_extracts_period_metadata_from_dei_tags(self):
         html = """
         <html><body>

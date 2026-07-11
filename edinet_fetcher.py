@@ -227,9 +227,12 @@ def _parse_financial_data_from_soup(soup, debug_candidates=None):
             continue
         key, tag_priority = match
 
-        nonzero_bonus = 500 if val_in_millions != 0 else 0
-        magnitude_bonus = min(abs(val_in_millions), 10_000_000) / 10_000_000
-        candidate_score = (context_score * 1_000) + (tag_priority * 10) + nonzero_bonus + magnitude_bonus
+        candidate_score = (
+            val_in_millions != 0,
+            context_score,
+            tag_priority,
+            abs(val_in_millions),
+        )
         previous = parsed_data.get(key)
         if previous is None or candidate_score > previous[1]:
             parsed_data[key] = (val_in_millions, candidate_score)
